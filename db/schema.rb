@@ -12,13 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2018_11_18_145558) do
 
-  create_table "employee_assets", force: :cascade do |t|
-    t.string "desc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.decimal "rate"
-  end
-
   create_table "employee_details", force: :cascade do |t|
     t.string "name"
     t.string "surname"
