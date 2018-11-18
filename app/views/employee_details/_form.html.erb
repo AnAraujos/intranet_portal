@@ -16,7 +16,7 @@
           <%= form.label :employee_number, 'Employee Number:' %>
         </div>
         <div class="col-auto">
-          <%= form.text_field :employee_number, value: @employee_number, class:'form-control'%>
+          <%= form.text_field :employee_number, value: @employee_number, class:'form-control', required: true %>
         </div>
       </div></br>
       <div class="field">
@@ -24,7 +24,7 @@
          <%= form.label :email, 'Email: '%>
         </div>
         <div class="col-auto">
-          <%= form.text_field :email, value: @email, class:'form-control'%>
+          <%= form.text_field :email, value: @email, class:'form-control', required: true%>
         </div>
       </div>
       <div class="col">
@@ -44,7 +44,7 @@
           <%= form.label :name, 'Name:'  %>
         </div>
         <div class="col-auto">
-          <%= form.text_field :name, class:'form-control' %>
+          <%= form.text_field :name, class:'form-control', required: true%>
         </div>
       </div>
       <div class="field"></br>
@@ -52,7 +52,7 @@
           <%= form.label :surname, 'Last Name:' %>
         </div>
         <div class="col-auto">
-          <%= form.text_field :surname, class:'form-control' %>
+          <%= form.text_field :surname, class:'form-control', required: true %>
         </div>
       </div>
       <div class="field"></br>
@@ -71,7 +71,7 @@
           <%= form.label :address_1, 'Address:' %>
         </div>
         <div class="col-auto">
-          <%= form.text_field :address_1, class:'form-control' %>
+          <%= form.text_field :address_1, class:'form-control', required: true %>
         </div>
       </div>
       <div class="field">
@@ -79,7 +79,7 @@
           <%= form.label :address_2, 'City:' %>
         </div>
         <div class="col-auto">
-          <%= form.text_field :address_2, class:'form-control' %>
+          <%= form.text_field :address_2, class:'form-control', required: true %>
         </div>
       </div>      
     </div>
@@ -90,7 +90,7 @@
           <%= form.label :employee_visa_id, 'Visa Type:' %>
         </div>
         <div class="col-auto">
-          <%= form.collection_select(:employee_visa_id, EmployeeVisa.all, :id, :desc, {:include_blank => "Select a category"}, {class: "form-control"}) %>
+          <%= form.collection_select(:employee_visa_id, EmployeeVisa.all, :id, :desc, {:include_blank => "Select a category"}, {class: "form-control" , required: true}) %>
         </div>
       </div>
       <div class="field"></br>
@@ -99,7 +99,7 @@
         </div>
         <div class="col-auto">
           <%= form.collection_select(:employee_asset_id, EmployeeAsset.all, :id, :desc,
-           {:include_blank => "Select a category"}, {class: "form-control"}) %>
+           {:include_blank => "Select a category"}, {class: "form-control", required: true}) %>
         </div>
       </div>
       <div class="field"></br>
@@ -107,7 +107,7 @@
         <%= form.label :employee_situation_id, 'Status:' %>
       </div>
       <div class="col-auto">
-        <%= form.collection_select(:employee_situation_id, EmployeeSituation.all, :id, :status, {:include_blank => "Select a category"}, {class: "form-control"}) %>
+        <%= form.collection_select(:employee_situation_id, EmployeeSituation.all, :id, :status, {:include_blank => "Select a category"}, {class: "form-control", required: true}) %>
       </div>
     </div>
   </div>
@@ -117,7 +117,7 @@
         <%= form.label :dt_entry, 'Registered Date:' %>
       </div>
       <div class="col-auto">
-        <%= form.date_field :dt_entry, :include_blank => true , :id => "datepicker", class:'form-control' %>
+        <%= form.date_field :dt_entry, :include_blank => true , :id => "datepicker", class:'form-control', required: true %>
       </div>
     </div>
     <div class="field"></br>
