@@ -1,0 +1,10 @@
+// Place all the styles related to the EmployeeDetails controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.titleLabel{
+    color: #777777;
+  font-size: 14px;
+  text-decoration: underline;
+    
+}

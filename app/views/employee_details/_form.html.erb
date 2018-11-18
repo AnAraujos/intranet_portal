@@ -1,0 +1,141 @@
+<%= form_with(model: employee_detail, local: true) do |form| %>
+  <% if employee_detail.errors.any? %>
+    
+    <div class="alert alert-danger" role="alert">
+      <h5><%= pluralize(employee_detail.errors.count, "error") %> prohibited this employee_detail from being saved:</h5>
+      <ul><% employee_detail.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="container">
+    <div class="row">
+      <div class="field">
+        <div class="col-auto">
+          <%= form.label :employee_number, 'Employee Number:' %>
+        </div>
+        <div class="col-auto">
+          <%= form.text_field :employee_number, value: @employee_number, class:'form-control'%>
+        </div>
+      </div></br>
+      <div class="field">
+        <div class="col-auto">
+         <%= form.label :email, 'Email: '%>
+        </div>
+        <div class="col-auto">
+          <%= form.text_field :email, value: @email, class:'form-control'%>
+        </div>
+      </div>
+      <div class="col">
+        <div class="field">
+          <%= form.label :admin, 'Admin' %>
+          <% if @admin == '1'  %>
+            <%= form.check_box :admin, :checked => true %> 
+          <% else %>
+            <%= form.check_box :admin, :checked => false %> 
+          <% end %>
+        </div>
+      </div>
+     </div>
+    <div class="row">
+      <div class="field"></br>
+        <div class="col-auto">
+          <%= form.label :name, 'Name:'  %>
+        </div>
+        <div class="col-auto">
+          <%= form.text_field :name, class:'form-control' %>
+        </div>
+      </div>
+      <div class="field"></br>
+        <div class="col-auto">
+          <%= form.label :surname, 'Last Name:' %>
+        </div>
+        <div class="col-auto">
+          <%= form.text_field :surname, class:'form-control' %>
+        </div>
+      </div>
+      <div class="field"></br>
+        <div class="col-auto">
+          <%= form.label :phone_number, 'Phone Number:'  %>
+        </div>
+        <div class="col-auto">
+          <%= form.text_field :phone_number, class:'form-control' %>
+        </div>
+      </div></br>
+    </div>
+    </br>
+    <div class="row">
+      <div class="field">
+        <div class="col-auto">
+          <%= form.label :address_1, 'Address:' %>
+        </div>
+        <div class="col-auto">
+          <%= form.text_field :address_1, class:'form-control' %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="col-auto">
+          <%= form.label :address_2, 'City:' %>
+        </div>
+        <div class="col-auto">
+          <%= form.text_field :address_2, class:'form-control' %>
+        </div>
+      </div>      
+    </div>
+    
+    <div class="row">
+      <div class="field"></br>
+        <div class="col-auto">
+          <%= form.label :employee_visa_id, 'Visa Type:' %>
+        </div>
+        <div class="col-auto">
+          <%= form.collection_select(:employee_visa_id, EmployeeVisa.all, :id, :desc, {:include_blank => "Select a category"}, {class: "form-control"}) %>
+        </div>
+      </div>
+      <div class="field"></br>
+        <div class="col-auto">
+          <%= form.label :employee_asset_id, 'Role:' %>
+        </div>
+        <div class="col-auto">
+          <%= form.collection_select(:employee_asset_id, EmployeeAsset.all, :id, :desc,
+           {:include_blank => "Select a category"}, {class: "form-control"}) %>
+        </div>
+      </div>
+      <div class="field"></br>
+        <div class="col-auto">
+        <%= form.label :employee_situation_id, 'Status:' %>
+      </div>
+      <div class="col-auto">
+        <%= form.collection_select(:employee_situation_id, EmployeeSituation.all, :id, :status, {:include_blank => "Select a category"}, {class: "form-control"}) %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="field"></br>
+      <div class="col-auto">
+        <%= form.label :dt_entry, 'Registered Date:' %>
+      </div>
+      <div class="col-auto">
+        <%= form.date_field :dt_entry, :include_blank => true , :id => "datepicker", class:'form-control' %>
+      </div>
+    </div>
+    <div class="field"></br>
+      <div class="col-auto">
+        <%= form.label :dt_leave, 'Leave Date:' %>
+      </div>
+      <div class="col-auto">
+        <%= form.date_field :dt_leave, :include_blank => true, :id => "datepicker", class:'form-control' %>
+      </div>
+    </div>
+  </div>
+  <div class="row"></br>
+    <div class="field"></br>
+      <div class="col-auto">
+        <%= form.submit 'Register Employee', :class => 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+

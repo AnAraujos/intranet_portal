@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>::Listing Employeers</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Employee Id</th>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Phone</th>
+      <th>Visa Type</th>
+      <th>Role</th>
+      <th>Situation</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @employee_details.each do |employee_detail| %>
+      <tr>
+        <td><%= employee_detail.user.employee_id %></td>
+        <td><%= employee_detail.name %></td>
+        <td><%= employee_detail.surname %></td>
+        <td><%= employee_detail.phone_number %></td>
+        <td><%= employee_detail.employee_visa.desc %></td>
+        <td><%= employee_detail.employee_asset.desc %></td>
+        <td><%= employee_detail.employee_situation.status %></td>
+        <td><%= button_to 'Show', employee_detail, :class => 'btn btn-success', :method => :get %></td>
+        <td><%= button_to 'Edit', edit_employee_detail_path(employee_detail), :class => ' btn btn-info', :method => :get   %></td>
+        <td><%= button_to 'Destroy', employee_detail, :class => 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Employee Detail', new_employee_detail_path %>
