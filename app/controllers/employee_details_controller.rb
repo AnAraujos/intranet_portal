@@ -39,23 +39,21 @@ class EmployeeDetailsController < ApplicationController
       render "new"
     else
 
-    createUser
-    @user = User.find_by_email(params[:employee_detail][:email])
-    
-    @employee_detail.user_id = @user.id
-    respond_to do |format|
-      if @employee_detail.save
-        format.html { redirect_to @employee_detail, notice: 'Employee detail was successfully created.' }
-        format.json { render :show, status: :created, location: @employee_detail }
-      else
-        format.html { render :new }
-        format.json { render json: @employee_detail.errors, status: :unprocessable_entity }
+      createUser
+      @user = User.find_by_email(params[:employee_detail][:email])
+      
+      @employee_detail.user_id = @user.id
+      respond_to do |format|
+        if @employee_detail.save
+          format.html { redirect_to @employee_detail, notice: 'Employee detail was successfully created.' }
+          format.json { render :show, status: :created, location: @employee_detail }
+        else
+          User.destroy(@user.id)
+          format.html { render :new }
+          format.json { render json: @employee_detail.errors, status: :unprocessable_entity }
+        end
       end
-    end
-  end
-    
-
-    
+    end    
   end
 
   def createUser
@@ -87,7 +85,9 @@ class EmployeeDetailsController < ApplicationController
   # DELETE /employee_details/1
   # DELETE /employee_details/1.json
   def destroy
+    @user_id = @employee_detail.user_id
     @employee_detail.destroy
+    User.destroy(@user_id)
     respond_to do |format|
       format.html { redirect_to employee_details_url, notice: 'Employee detail was successfully destroyed.' }
       format.json { head :no_content }

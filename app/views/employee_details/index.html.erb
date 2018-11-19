@@ -1,6 +1,14 @@
 <p id="notice"><%= notice %></p>
+  <div class="row">      
+    <div class="col-md-10">
+      <p>::Listing Employeers</p>
+    </div>
+    <div class="col-md-4-right">
+      <%= link_to 'Register Employee', new_employee_detail_path, :class => 'btn btn-primary'%>
+    </div>
+  </div>
+  </br>
 
-<p>::Listing Employeers</p>
 
 <table class="table table-striped">
   <thead>
@@ -36,4 +44,4 @@
 
 <br>
 
-<%= link_to 'New Employee Detail', new_employee_detail_path %>
+
