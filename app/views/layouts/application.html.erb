@@ -34,7 +34,9 @@
              
               <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li><a href="#">My Jobs</a></li>
-                <li><%= link_to "Edit Profile", edit_employee_detail_path(@current_user_employer_id) %></li>
+                <% if (!@current_user_employer_id.blank?) %>
+                  <%= link_to "Edit Profile", edit_employee_detail_path(@current_user_employer_id) %>
+                <% end %>
                   <li><a href="#">Request Holidays</a></li>
                 <li><a href="#">Request P45</a></li>
                 <%= link_to 'Change my Password', edit_user_registration_path %>
@@ -43,7 +45,7 @@
             <% if (current_user.admin?) %>
               <li><a href="/employee">Employee</a></li>
               <li><a href="#">Add a Job</a></li>
-            <% end%>
+            <%end%>
         </ul>
       </nav>
 

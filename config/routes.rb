@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   get '/home' => 'page#home'
   get '/employee' => 'employee_details#index'
   get '/employee_details/:id/show'    => 'employee_details#show'
-  get '/employee_details/:id/edit_info'    => 'employee_details#edit_info'
+  get '/employee_details/:id/edit'    => 'employee_details#edit'
 end
 
