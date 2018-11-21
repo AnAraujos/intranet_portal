@@ -5,6 +5,7 @@ class EmployeeDetailsController < ApplicationController
   # GET /employee_details.json
   def index
     @employee_details = EmployeeDetail.all
+   
   end
 
   # GET /employee_details/1
@@ -19,6 +20,24 @@ class EmployeeDetailsController < ApplicationController
 
   # GET /employee_details/1/edit
   def edit
+  end
+
+  def edit_info
+
+    respond_to do |format|
+      @user = User.find_by_email(@employee_detail.user.email)
+      if @employee_detail.update(employee_detail_params)
+         @user = User.find_by_email(@employee_detail.user.email)
+         
+         @user.update_attributes(admin:params[:employee_detail][:admin])
+
+        format.html { redirect_to @employee_detail, notice: 'Employee detail was successfully updated.' }
+        format.json { render :show, status: :ok, location: @employee_detail }
+      else
+        format.html { render :edit }
+        format.json { render json: @employee_detail.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /employee_details
@@ -73,6 +92,10 @@ class EmployeeDetailsController < ApplicationController
   def update
     respond_to do |format|
       if @employee_detail.update(employee_detail_params)
+         @user = User.find_by_email(@employee_detail.user.email)
+         
+         @user.update_attributes(admin:params[:employee_detail][:admin])
+
         format.html { redirect_to @employee_detail, notice: 'Employee detail was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee_detail }
       else

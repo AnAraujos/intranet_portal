@@ -16,7 +16,11 @@
           <%= form.label :employee_number, 'Employee Number:' %>
         </div>
         <div class="col-auto">
-          <%= form.text_field :employee_number, value: @employee_number, class:'form-control', required: true %>
+          <% if employee_detail.persisted?%>
+            <%= form.text_field :employee_number, value: employee_detail.user.employee_id, class:'form-control', required: true, :disabled => true %>
+          <% else %>
+            <%= form.text_field :employee_number, value: @employee_number, class:'form-control', required: true %>
+          <% end %>
         </div>
       </div></br>
       <div class="field">
@@ -24,17 +28,30 @@
          <%= form.label :email, 'Email: '%>
         </div>
         <div class="col-auto">
-          <%= form.text_field :email, value: @email, class:'form-control', required: true%>
+          <% if employee_detail.persisted?%>
+            <%= form.text_field :employee_number, value: employee_detail.user.email, class:'form-control', required: true, :disabled => true %>
+          <% else %>
+            <%= form.text_field :employee_number, value: @email, class:'form-control', required: true %>
+          <% end %>
         </div>
       </div>
+
       <div class="col">
         <div class="field">
           <%= form.label :admin, 'Admin' %>
-          <% if @admin == '1'  %>
-            <%= form.check_box :admin, :checked => true %> 
-          <% else %>
-            <%= form.check_box :admin, :checked => false %> 
-          <% end %>
+           <% if employee_detail.persisted?%>
+              <% if employee_detail.user.admin? %>
+                <%= form.check_box :admin, :checked => true, :disabled => false %>
+              <% else %>
+                <%= form.check_box :admin, :checked => false, :disabled => true %>
+              <% end %>
+            <% else %>
+              <% if @admin == '1'  %>
+                <%= form.check_box :admin, :checked => true, :disabled => false %> 
+              <% else %>
+                <%= form.check_box :admin, :checked => false, :disabled => true %> 
+              <% end %>
+            <% end %>
         </div>
       </div>
      </div>
@@ -90,7 +107,7 @@
           <%= form.label :employee_visa_id, 'Visa Type:' %>
         </div>
         <div class="col-auto">
-          <%= form.collection_select(:employee_visa_id, EmployeeVisa.all, :id, :desc, {:include_blank => "Select a category"}, {class: "form-control" , required: true}) %>
+          <%= form.collection_select(:employee_visa_id, EmployeeVisa.all, :id, :desc, {:include_blank => "Select a category"}, {class: "form-control" , required: true, disabled: !current_user.admin?}) %>
         </div>
       </div>
       <div class="field"></br>
@@ -99,7 +116,7 @@
         </div>
         <div class="col-auto">
           <%= form.collection_select(:employee_asset_id, EmployeeAsset.all, :id, :desc,
-           {:include_blank => "Select a category"}, {class: "form-control", required: true}) %>
+           {:include_blank => "Select a category"}, {class: "form-control", required: true, disabled: !current_user.admin?}) %>
         </div>
       </div>
       <div class="field"></br>
@@ -107,7 +124,7 @@
         <%= form.label :employee_situation_id, 'Status:' %>
       </div>
       <div class="col-auto">
-        <%= form.collection_select(:employee_situation_id, EmployeeSituation.all, :id, :status, {:include_blank => "Select a category"}, {class: "form-control", required: true}) %>
+        <%= form.collection_select(:employee_situation_id, EmployeeSituation.all, :id, :status, {:include_blank => "Select a category"}, {class: "form-control", required: true, disabled: !current_user.admin?}) %>
       </div>
     </div>
   </div>
@@ -117,7 +134,7 @@
         <%= form.label :dt_entry, 'Registered Date:' %>
       </div>
       <div class="col-auto">
-        <%= form.date_field :dt_entry, :include_blank => true , :id => "datepicker", class:'form-control', required: true %>
+        <%= form.date_field :dt_entry, :include_blank => true , :id => "datepicker", class:'form-control', required: true, disabled: !current_user.admin? %>
       </div>
     </div>
     <div class="field"></br>
@@ -125,14 +142,15 @@
         <%= form.label :dt_leave, 'Leave Date:' %>
       </div>
       <div class="col-auto">
-        <%= form.date_field :dt_leave, :include_blank => true, :id => "datepicker", class:'form-control' %>
+        <%= form.date_field :dt_leave, :include_blank => true, :id => "datepicker", class:'form-control',
+        disabled: !current_user.admin? %>
       </div>
     </div>
   </div>
   <div class="row"></br>
     <div class="field"></br>
       <div class="col-auto">
-        <%= form.submit 'Register Employee', :class => 'btn btn-primary' %>
+        <%= form.submit 'Save Employee', :class => 'btn btn-primary' %>
       </div>
     </div>
   </div>

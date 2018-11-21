@@ -1,4 +1,28 @@
 <p id="notice"><%= notice %></p>
+  <div class="row">      
+    <div class="col-md-10">
+      <p>::Employee Detail</p>
+    </div>
+    <div class="col-md-4-right">
+      <%= link_to 'Edit Employee Detail', edit_employee_detail_path(@employee_detail), :class => 'btn btn-primary'%>
+    </div>
+  </div>
+  </br>
+
+<p>
+  <strong>Employee ID:</strong>
+  <%= @employee_detail.user.employee_id %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @employee_detail.user.email %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @employee_detail.user.admin %>
+</p>
 
 <p>
   <strong>Name:</strong>
@@ -16,33 +40,28 @@
 </p>
 
 <p>
-  <strong>Address 1:</strong>
+  <strong>Address:</strong>
   <%= @employee_detail.address_1 %>
 </p>
 
 <p>
-  <strong>Address 2:</strong>
+  <strong>City:</strong>
   <%= @employee_detail.address_2 %>
 </p>
 
 <p>
-  <strong>Employee visa:</strong>
-  <%= @employee_detail.employee_visa %>
+  <strong>Employee Visa:</strong>
+  <%= @employee_detail.employee_visa.desc %>
 </p>
 
 <p>
-  <strong>Employee asset:</strong>
-  <%= @employee_detail.employee_asset %>
+  <strong>Employee Asset:</strong>
+  <%= @employee_detail.employee_asset.desc %>
 </p>
 
 <p>
-  <strong>Employee situation:</strong>
-  <%= @employee_detail.employee_situation %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @employee_detail.user %>
+  <strong>Employee Situation:</strong>
+  <%= @employee_detail.employee_situation.status %>
 </p>
 
 <p>
@@ -55,5 +74,3 @@
   <%= @employee_detail.dt_leave %>
 </p>
 
-<%= link_to 'Edit', edit_employee_detail_path(@employee_detail) %> |
-<%= link_to 'Back', employee_details_path %>

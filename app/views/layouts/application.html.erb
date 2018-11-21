@@ -30,11 +30,12 @@
 
         <ul class="list-unstyled components">
           <li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Account</a>
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Account</a> 
+             
               <ul class="collapse list-unstyled" id="homeSubmenu">
                 <li><a href="#">My Jobs</a></li>
-                <li><a href="#">Edit My Details</a></li>
-                <li><a href="#">Request Holidays</a></li>
+                <li><%= link_to "Edit Profile", edit_employee_detail_path(@current_user_employer_id) %></li>
+                  <li><a href="#">Request Holidays</a></li>
                 <li><a href="#">Request P45</a></li>
                 <%= link_to 'Change my Password', edit_user_registration_path %>
               </ul>
@@ -59,7 +60,7 @@
                   <li class="nav-item"><a class="nav-link" href="#">Page</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">Page</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">Page</a></li>
-                  <li> <%= link_to "LOG OUT", destroy_user_session_path, :method => :delete %></li>
+                  <li> <%= link_to "LOG OUT", destroy_user_session_path, :method => :get %></li>
                 </ul>
               </div>
           </div>
