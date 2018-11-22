@@ -7,9 +7,7 @@ body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
 }
-.field_with_errors {
- @extend .has-error;
-}
+
 
 p {
     font-family: 'Poppins', sans-serif;
