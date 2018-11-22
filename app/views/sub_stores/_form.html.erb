@@ -1,0 +1,57 @@
+  
+  <div class="container">
+  <%= form_with(model: sub_store, local: true) do |form| %>
+  <% if sub_store.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h5><%= pluralize(sub_store.errors.count, "error") %> prohibited this sub_store from being saved:</h5>
+      <ul><% sub_store.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= form.label :store_id, 'Store:' %>
+        <%= form.collection_select(:store_id, Store.all, :id, :name, {:include_blank => "Select a store"}, {class: "form-control" , required: true}) %>
+      </div>
+      <div class="form-group col-md-4">
+        <%= form.label :number, 'Store Number:' %>        
+        <%= form.text_field :number, class:'form-control', required: true %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <%= form.label :unit_qtd, 'Units in Store:' %>
+        <%= form.text_field :unit_qtd, class:'form-control', required: true %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <%= form.label :address, 'Store Address:' %>
+        <%= form.text_field :address, class:'form-control', required: true %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= form.label :contact_manager, 'Store Manager:' %>
+        <%= form.text_field :contact_manager, class:'form-control', required: true %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= form.label :phone, 'Store Phone:' %>
+        <%= form.text_field :phone, class:'form-control', required: true %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+         <%= form.submit 'Save Substore', :class => 'btn btn-primary' %>
+      </div>
+      <% end -%>
+      <div class="form-group col-md-2">
+       <%= button_to 'Cancel', sub_stores_path, :class => 'btn btn-outline-primary', :method => :get%>
+      </div>
+    </div>   
+  </div>
+
+  
+

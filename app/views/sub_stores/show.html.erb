@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+<div class="row">      
+    <div class="col-md-10">
+      <p>::Sub Store Details</p>
+    </div>
+    <div class="col-md-4-right">
+      <%= button_to 'Sub Store List', sub_stores_path, :class => 'btn btn-primary', :method => :get%>
+    </div>
+  </div>
+<p>
+  <strong>Number:</strong>
+  <%= @sub_store.number %>
+</p>
+
+<p>
+  <strong>Store:</strong>
+  <%= @sub_store.store.name %>
+</p>
+
+<p>
+  <strong>Unit qtd:</strong>
+  <%= @sub_store.unit_qtd %>
+</p>
+
+<p>
+  <strong>Contact manager:</strong>
+  <%= @sub_store.contact_manager %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @sub_store.phone %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @sub_store.address %>
+</p>
+

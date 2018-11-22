@@ -7,13 +7,16 @@ body {
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
 }
+.field_with_errors {
+ @extend .has-error;
+}
 
 p {
     font-family: 'Poppins', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: black;
+    color: #999;
 }
 
 a,
@@ -87,8 +90,8 @@ a:focus {
 }
 
 #sidebar ul li a {
-    text-decoration: none;
     color: #fff;
+    text-decoration: none;
     padding: 10px;
     font-size: 1.1em;
     display: block;

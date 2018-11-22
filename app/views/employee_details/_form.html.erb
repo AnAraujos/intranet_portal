@@ -1,159 +1,110 @@
-<%= form_with(model: employee_detail, local: true) do |form| %>
-  <% if employee_detail.errors.any? %>
-    
-    <div class="alert alert-danger" role="alert">
-      <h5><%= pluralize(employee_detail.errors.count, "error") %> prohibited this employee_detail from being saved:</h5>
-      <ul><% employee_detail.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="container">
-    <div class="row">
-      <div class="field">
-        <div class="col-auto">
-          <%= form.label :employee_number, 'Employee Number:' %>
-        </div>
-        <div class="col-auto">
-          <% if employee_detail.persisted?%>
-            <%= form.text_field :employee_number, value: employee_detail.user.employee_id, class:'form-control', required: true, :disabled => true %>
-          <% else %>
-            <%= form.text_field :employee_number, value: @employee_number, class:'form-control', required: true %>
-          <% end %>
-        </div>
-      </div></br>
-      <div class="field">
-        <div class="col-auto">
-         <%= form.label :email, 'Email: '%>
-        </div>
-        <div class="col-auto">
-          <% if employee_detail.persisted?%>
-            <%= form.text_field :employee_number, value: employee_detail.user.email, class:'form-control', required: true, :disabled => true %>
-          <% else %>
-            <%= form.text_field :employee_number, value: @email, class:'form-control', required: true %>
-          <% end %>
-        </div>
-      </div>
 
-      <div class="col">
-        <div class="field">
-          <%= form.label :admin, 'Admin' %>
-           <% if employee_detail.persisted?%>
-              <% if employee_detail.user.admin? %>
-                <%= form.check_box :admin, :checked => true, :disabled => false %>
-              <% else %>
-                <%= form.check_box :admin, :checked => false, :disabled => true %>
-              <% end %>
+  <div class="container">
+  <%= form_with(model: employee_detail, local: true) do |form| %>
+    <% if employee_detail.errors.any? %>
+      
+      <div class="alert alert-danger" role="alert">
+        <h5><%= pluralize(employee_detail.errors.count, "error") %> prohibited this Employee from being saved:</h5>
+        <ul><% employee_detail.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <%= form.label :employee_number, 'Employee Number:' %>
+        <% if employee_detail.persisted?%>
+          <%= form.text_field :employee_number, value: employee_detail.user.employee_id, class:'form-control', required: true, :disabled => true %>
+        <% else %>
+           <%= form.text_field :employee_number, value: @employee_number, class:'form-control', required: true %>
+        <% end %>
+      </div>
+      <div class="form-group col-md-4">
+        <%= form.label :email, 'Email: '%>
+        <% if employee_detail.persisted?%>
+          <%= form.text_field :email, value: employee_detail.user.email, class:'form-control', required: true, :disabled => true %>
+        <% else %>
+          <%= form.text_field :email, value: @email, class:'form-control', required: true %>
+        <% end %>
+      </div>
+      <div class="form-group col-md-2">
+        <div class="form-check">          
+          <% if employee_detail.persisted?%>
+            <% if employee_detail.user.admin? %>
+              <%= form.check_box :admin, :checked => true, :disabled => false, class:'form-check-input'%>
             <% else %>
-              <% if @admin == '1'  %>
-                <%= form.check_box :admin, :checked => true, :disabled => false %> 
-              <% else %>
-                <%= form.check_box :admin, :checked => false, :disabled => true %> 
-              <% end %>
+              <%= form.check_box :admin, :checked => false, :disabled => true, class:'form-check-input' %>
             <% end %>
+          <% else %>
+            <% if @admin == '1'  %>
+              <%= form.check_box :admin, :checked => true, :disabled => false,class:'form-check-input' %> 
+            <% else %>
+              <%= form.check_box :admin, :checked => false, :disabled => true,class:'form-check-input' %> 
+            <% end %>
+          <% end %>
+          <%= form.label :admin, 'Admin', class:'form-check-label'%>
         </div>
       </div>
-     </div>
-    <div class="row">
-      <div class="field"></br>
-        <div class="col-auto">
-          <%= form.label :name, 'Name:'  %>
-        </div>
-        <div class="col-auto">
-          <%= form.text_field :name, class:'form-control', required: true%>
-        </div>
-      </div>
-      <div class="field"></br>
-        <div class="col-auto">
-          <%= form.label :surname, 'Last Name:' %>
-        </div>
-        <div class="col-auto">
-          <%= form.text_field :surname, class:'form-control', required: true %>
-        </div>
-      </div>
-      <div class="field"></br>
-        <div class="col-auto">
-          <%= form.label :phone_number, 'Phone Number:'  %>
-        </div>
-        <div class="col-auto">
-          <%= form.text_field :phone_number, class:'form-control' %>
-        </div>
-      </div></br>
     </div>
-    </br>
-    <div class="row">
-      <div class="field">
-        <div class="col-auto">
-          <%= form.label :address_1, 'Address:' %>
-        </div>
-        <div class="col-auto">
-          <%= form.text_field :address_1, class:'form-control', required: true %>
-        </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= form.label :name, 'Name:'  %>
+        <%= form.text_field :name, class:'form-control', required: true%>
       </div>
-      <div class="field">
-        <div class="col-auto">
-          <%= form.label :address_2, 'City:' %>
-        </div>
-        <div class="col-auto">
-          <%= form.text_field :address_2, class:'form-control', required: true %>
-        </div>
-      </div>      
+      <div class="form-group col-md-4">
+        <%= form.label :surname, 'Last Name:' %>
+        <%= form.text_field :surname, class:'form-control', required: true %>
+      </div>
     </div>
-    
-    <div class="row">
-      <div class="field"></br>
-        <div class="col-auto">
-          <%= form.label :employee_visa_id, 'Visa Type:' %>
-        </div>
-        <div class="col-auto">
-          <%= form.collection_select(:employee_visa_id, EmployeeVisa.all, :id, :desc, {:include_blank => "Select a category"}, {class: "form-control" , required: true, disabled: !current_user.admin?}) %>
-        </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= form.label :address_1, 'Address:' %>
+        <%= form.text_field :address_1, class:'form-control', required: true %>
       </div>
-      <div class="field"></br>
-        <div class="col-auto">
-          <%= form.label :employee_asset_id, 'Role:' %>
-        </div>
-        <div class="col-auto">
-          <%= form.collection_select(:employee_asset_id, EmployeeAsset.all, :id, :desc,
-           {:include_blank => "Select a category"}, {class: "form-control", required: true, disabled: !current_user.admin?}) %>
-        </div>
+      <div class="form-group col-md-4">
+        <%= form.label :address_2, 'City:' %>
+        <%= form.text_field :address_2, class:'form-control', required: true %>
       </div>
-      <div class="field"></br>
-        <div class="col-auto">
+      <div class="form-group col-md-4">
+        <%= form.label :phone_number, 'Phone:' %>
+        <%= form.text_field :phone_number, class:'form-control', required: true %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <%= form.label :employee_visa_id, 'Visa Type:' %>
+        <%= form.collection_select(:employee_visa_id, EmployeeVisa.all, :id, :desc, {:include_blank => "Select a category"}, {class: "form-control" , required: true, disabled: !current_user.admin?}) %>
+      </div>
+      <div class="form-group col-md-4">
+        <%= form.label :employee_asset_id, 'Role:' %>
+        <%= form.collection_select(:employee_asset_id, EmployeeAsset.all, :id, :desc,
+             {:include_blank => "Select a category"}, {class: "form-control", required: true, disabled: !current_user.admin?}) %>
+      </div>
+      <div class="form-group col-md-4">
         <%= form.label :employee_situation_id, 'Status:' %>
-      </div>
-      <div class="col-auto">
         <%= form.collection_select(:employee_situation_id, EmployeeSituation.all, :id, :status, {:include_blank => "Select a category"}, {class: "form-control", required: true, disabled: !current_user.admin?}) %>
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="field"></br>
-      <div class="col-auto">
+    <div class="form-row">
+      <div class="form-group col-md-4">
         <%= form.label :dt_entry, 'Registered Date:' %>
-      </div>
-      <div class="col-auto">
         <%= form.date_field :dt_entry, :include_blank => true , :id => "datepicker", class:'form-control', required: true, disabled: !current_user.admin? %>
       </div>
-    </div>
-    <div class="field"></br>
-      <div class="col-auto">
+      <div class="form-group col-md-4">
         <%= form.label :dt_leave, 'Leave Date:' %>
-      </div>
-      <div class="col-auto">
         <%= form.date_field :dt_leave, :include_blank => true, :id => "datepicker", class:'form-control',
-        disabled: !current_user.admin? %>
+          disabled: !current_user.admin? %>
       </div>
     </div>
-  </div>
-  <div class="row"></br>
-    <div class="field"></br>
-      <div class="col-auto">
-        <%= form.submit 'Save Employee', :class => 'btn btn-primary' %>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+         <%= form.submit 'Save Employee', :class => 'btn btn-primary' %>
       </div>
+      <% end -%>
+      <div class="form-group col-md-2">
+       <%= button_to 'Cancel', employee_details_path, :class => 'btn btn-outline-primary', :method => :get%>
+      </div>   
     </div>
-  </div>
 </div>
-<% end %>
 

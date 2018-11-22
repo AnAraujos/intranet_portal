@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  store: one
+  unit_qtd: 9.99
+  contact_manager: MyString
+  phone: MyString
+  address: MyString
+
+two:
+  number: MyString
+  store: two
+  unit_qtd: 9.99
+  contact_manager: MyString
+  phone: MyString
+  address: MyString

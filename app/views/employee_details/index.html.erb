@@ -4,7 +4,7 @@
       <p>::Listing Employeers</p>
     </div>
     <div class="col-md-4-right">
-      <%= link_to 'Register Employee', new_employee_detail_path, :class => 'btn btn-primary'%>
+      <%= button_to 'Register Employee', new_employee_detail_path, :class => 'btn btn-primary', :method => :get%>
     </div>
   </div>
   </br>
@@ -34,9 +34,9 @@
         <td><%= employee_detail.employee_visa.desc %></td>
         <td><%= employee_detail.employee_asset.desc %></td>
         <td><%= employee_detail.employee_situation.status %></td>
-        <td><%= button_to 'Show', employee_detail, :class => 'btn btn-success', :method => :get %></td>
-        <td><%= button_to 'Edit', edit_employee_detail_path(employee_detail), :class => ' btn btn-info', :method => :get   %></td>
-        <td><%= button_to 'Destroy', employee_detail, :class => 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Show', employee_detail, :class => 'btn btn-success btn-sm', :method => :get %></td>
+        <td><%= button_to 'Edit', edit_employee_detail_path(employee_detail), :class => ' btn btn-info btn-sm', :method => :get   %></td>
+        <td><%= button_to 'Destroy', employee_detail, :class => 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

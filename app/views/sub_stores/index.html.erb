@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+<div class="row">      
+    <div class="col-md-10">
+      <p>::Listing Sub Stores</p>
+    </div>
+    <div class="col-md-4-right">
+      <%= button_to 'New Sub Store', new_sub_store_path, :class => 'btn btn-primary', :method => :get%>
+    </div>
+  </div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Number</th>
+      <th>Store</th>
+      <th>Unit qtd</th>
+      <th>Contact manager</th>
+      <th>Phone</th>
+      <th>Address</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sub_stores.each do |sub_store| %>
+      <tr>
+        <td><%= sub_store.number %></td>
+        <td><%= sub_store.store.name %></td>
+        <td><%= sub_store.unit_qtd %></td>
+        <td><%= sub_store.contact_manager %></td>
+        <td><%= sub_store.phone %></td>
+        <td><%= sub_store.address %></td>
+        <td><%= button_to 'Show', sub_store, :class => 'btn btn-success btn-sm', :method => :get %></td>
+        <td><%= button_to 'Edit', edit_sub_store_path(sub_store),:class => 'btn btn-info btn-sm', :method => :get  %></td>
+        <td><%= button_to 'Destroy', sub_store, :class => 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' }  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

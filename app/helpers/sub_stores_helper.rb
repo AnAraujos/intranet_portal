@@ -1,0 +1,2 @@
+module SubStoresHelper
+end

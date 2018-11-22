@@ -44,7 +44,18 @@
           </li>
             <% if (current_user.admin?) %>
               <li><a href="/employee">Employee</a></li>
-              <li><a href="#">Add a Job</a></li>
+              <li>
+                    <a href="#storeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Customers</a>
+                    <ul class="collapse list-unstyled" id="storeSubmenu">
+                        <li>
+                            <a href="/stores">Stores</a>
+                        </li>
+                        <li>
+                            <a href="/substores">SubStores</a>
+                        </li>
+                    </ul>
+                </li>
+              <li><a href="#">Add Job</a></li>
             <%end%>
         </ul>
       </nav>

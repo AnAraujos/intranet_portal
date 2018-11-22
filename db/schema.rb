@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_145558) do
+ActiveRecord::Schema.define(version: 2018_11_22_184937) do
 
   create_table "employee_assets", force: :cascade do |t|
     t.string "desc"
@@ -50,6 +50,25 @@ ActiveRecord::Schema.define(version: 2018_11_18_145558) do
     t.string "desc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sub_stores", force: :cascade do |t|
+    t.string "number"
+    t.integer "store_id"
+    t.decimal "unit_qtd"
+    t.string "contact_manager"
+    t.string "phone"
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_sub_stores_on_store_id"
   end
 
   create_table "users", force: :cascade do |t|
