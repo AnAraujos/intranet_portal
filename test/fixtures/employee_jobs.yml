@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee_detail: one
+  job: one
+  employeer_job_situation: one
+
+two:
+  employee_detail: two
+  job: two
+  employeer_job_situation: two

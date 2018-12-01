@@ -9,13 +9,22 @@ User.create!(employee_id: "123456", password: "123456", password_confirmation: "
 EmployeeVisa.create!(desc: 'Student - 20 hours')
 EmployeeVisa.create!(desc: 'Student - 40 hours')
 EmployeeVisa.create!(desc: 'No Visa Required')
-EmployeeSituation.create!(status: 'Active')
 EmployeeAsset.create!(desc: 'Auditor', rate: 9.95)
 EmployeeAsset.create!(desc: 'Specialist', rate: 12.89)
 EmployeeAsset.create!(desc: 'Expert', rate: 14.89)
 EmployeeAsset.create!(desc: 'Top Gun', rate: 16.89)
 EmployeeAsset.create!(desc: 'Supervisor', rate: 18.89)
 EmployeeAsset.create!(desc: 'Manager', rate: 20.89)
+
+EmployeeSituation.create!(status: 'Active')
 EmployeeSituation.create!(status: 'Inactive')
 EmployeeSituation.create!(status: 'Holidays')
 EmployeeSituation.create!(status: 'Visa Expired')
+
+EmployeerJobSituation.create!(status: "Pending")
+EmployeerJobSituation.create!(status: "Accepted")
+EmployeerJobSituation.create!(status: "Rejected")
+
+JobSituation.create!(desc: "Open")
+JobSituation.create!(desc: "Closed")
+JobSituation.create!(desc: "Canceled")

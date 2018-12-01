@@ -61,6 +61,19 @@ class SubStoresController < ApplicationController
     end
   end
 
+  def find_majors_given_school_id
+   store_id = params[:store_id]#utilizes the url to extract school_id ".../find_majors_given_school_id?school_id=123123"
+   puts "THIS IS MY SCHOOL ID :: #{store_id}"#view this in teminal
+
+   majors = SubStore.search_for_school_id(store_id).as_json#query the model for the data and convert it to a hash using as_json
+   puts "THESE ARE MY MAJORS IN A HASH :: #{majors}"
+   respond_to do |format|
+        format.json { 
+            render json: majors
+        } 
+   end
+end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sub_store

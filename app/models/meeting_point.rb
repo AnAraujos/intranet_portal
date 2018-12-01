@@ -1,0 +1,2 @@
+class MeetingPoint < ApplicationRecord
+end

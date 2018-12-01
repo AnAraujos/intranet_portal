@@ -1,0 +1,50 @@
+ <div class="content">
+  <% if (!@past_current_employee_job.blank?) %>
+  		<div class="card-header alert-success font-weight-bold ">Past Jobs</div>
+    		<div class="panel-block">
+     		<table class="table table-striped table-inbox">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Store</th>
+              <th>Paid Hours</th>
+              <th>Travel Hours</th>
+              <th>Job Situation</th>
+            </tr>
+          </thead>
+          <tbody>
+          	<% @past_current_employee_job.each do |past_current_employee_job| %> 
+            	<tr class="unread">
+                <td class="view-message"><%= past_current_employee_job.dt_start.strftime("%d-%m-%Y")%></td>
+                <td class="view-message"><%=past_current_employee_job.sub_store.store.name%></td>
+                <td class="view-message"><%=past_current_employee_job.paid_hours%></td>
+                <td class="view-message"><%=past_current_employee_job.travel_hours%></td>
+                <%if past_current_employee_job.situation = 2 %>
+                  <td class="view-message">Accepted</td>
+                <% elsif past_current_employee_job.situation = 3  %>
+                  <td class="view-message">Rejected</td>
+                <% end %>
+              </tr>
+            <% end %>     
+          </tbody>
+        </table>
+      </div>
+  <% end %>
+  <% if (!@next_current_employee_job.blank?) %>
+      <div class="card-header alert-info font-weight-bold ">Next Jobs</div>
+        <div class="panel-block">
+        <table class="table table-striped table-inbox">
+          <tbody>
+            <% @next_current_employee_job.each do |next_current_employee_job| %> 
+              <tr class="unread">
+                <td class="view-message"><%= next_current_employee_job.dt_start.strftime("%d-%m-%Y")%></td>
+                <td class="view-message"><%= next_current_employee_job.meeting_time.strftime("%H:%M")%></td>
+                <td class="view-message"><%=next_current_employee_job.sub_store.store.name%></td>
+                <td class="view-message"><%=next_current_employee_job.sub_store.address%></td>
+              </tr>
+            <% end %>     
+          </tbody>
+        </table>
+      </div>
+  <% end %>
+</div>

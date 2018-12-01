@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dt_start: 2018-11-23
+  dt_end: 2018-11-23
+  meeting_time: 2018-11-23 08:59:16
+  start_time: 2018-11-23 08:59:16
+  end_time: 2018-11-23 08:59:16
+  job_end: 2018-11-23 08:59:16
+  supervisor_id: 1
+  travel_hours: 9.99
+  paid_hours: 9.99
+  supposed_hours: 1
+  meeting_point: one
+  sub_store: one
+
+two:
+  dt_start: 2018-11-23
+  dt_end: 2018-11-23
+  meeting_time: 2018-11-23 08:59:16
+  start_time: 2018-11-23 08:59:16
+  end_time: 2018-11-23 08:59:16
+  job_end: 2018-11-23 08:59:16
+  supervisor_id: 1
+  travel_hours: 9.99
+  paid_hours: 9.99
+  supposed_hours: 1
+  meeting_point: two
+  sub_store: two

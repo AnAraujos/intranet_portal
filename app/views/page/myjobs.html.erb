@@ -1,0 +1,27 @@
+ <div class="content" style='background: #ecf0f4'>
+	<div class="panel panel-default">
+		
+      <div class="panel-body">
+    		<p>You have any new jobs!</p>
+  		
+  	
+  		<div class="panel-body">
+    		
+  		</div>
+   		<table class="table table-striped table-inbox">
+        <tbody>
+        	<% @current_employee_job_by_month.each do |current_employee_job_by_month| %> 
+        	<tr class="unread">
+            <td class="view-message"><%= link_to current_employee_job_by_month.dt_start.strftime("%B-%Y"), page_jobs_list_url(:employee_id => current_employee_job_by_month.employee) %>
+            	
+            </td>
+          </tr>     
+              
+      <% end %>
+                          </tbody>
+                          </table>
+</div>
+
+
+
+</div>

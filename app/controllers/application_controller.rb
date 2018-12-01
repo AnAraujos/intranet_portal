@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
  protect_from_forgery with: :exception
  before_action :configure_permitted_parameters, if: :devise_controller?
  #before_action :authenticate_user!
@@ -15,7 +14,10 @@ class ApplicationController < ActionController::Base
 
 	 def get_employee
 	 	if user_signed_in?
-	 	 @current_user_employer_id = EmployeeDetail.where("user_id" => current_user.id).select( "id").first
+	 	 @current_user_employer_id = EmployeeDetail.where("user_id" => current_user.id).first
 	 	end
 	end
+
+	
+
 end

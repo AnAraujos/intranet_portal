@@ -1,0 +1,46 @@
+<div class="container">
+  <%= form_with(model: employee_job, local: true) do |form| %>
+  <% if employee_job.errors.any? %>
+    <div class="alert alert-danger" role="alert">
+      <h5><%= pluralize(employee_job.errors.count, "error") %> prohibited this employee_job from being saved:</h5>
+      <ul><% employee_job.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+ 
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <%= form.label :employee_asset_id, 'Role:' %>
+        <%= form.collection_select :employee_asset_id, EmployeeAsset.order(:desc), :id, :desc,  {:include_blank => "Select a Role"},{:id=>'asset_id_select', class: 'form-control', required: true} %>
+        <%= form.hidden_field :job_id, value: @job_id, :id=>"job_id"%>
+        <%= form.hidden_field :employeer_job_situation_id, value: 1 %>                
+      </div>
+
+      <div class="form-group col-md-3">
+        <%= form.label :employee_detail_id, 'Employeers: ' %><br>
+        <%= form.collection_select :employee_detail_id, [],:id, :name, {include_blank: "Select Employee"},{:id=>'employee_id_select', :name => "item", class: "form-control", disabled: true} %>
+
+      </div>
+      <div class="row  align-items-end">
+        <div class="form-group col-md-2">
+          <input type="button" id="addbtn" name="addbtn" value="Add" class="btn btn-primary btn-md text-center", disabled="true" />
+        </div>
+       </div>
+    </div>
+    <div class="form-group">      
+      <h5>List:</h5>
+        <hr><ul id="list" class="list-group" name="list" , required="true"></ul>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+         <%= form.submit 'Send Jobs', :class => 'btn btn-primary', :id=> "btnSend" %>
+      </div>
+      <% end -%>
+      <div class="form-group col-md-2">
+       <%= button_to 'Cancel', jobs_path, :class => 'btn btn-outline-primary', :method => :get%>
+      </div>
+    </div>   
+  </div>
+

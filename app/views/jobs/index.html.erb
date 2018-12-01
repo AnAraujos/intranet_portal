@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+  <div class="row">      
+    <div class="col-md-10">
+      <p>::Listing Jobs</p>
+    </div>
+    <div class="col-md-4-right">
+      <%= button_to 'Create a Job', new_job_path, :class => 'btn btn-primary', :method => :get%>
+    </div>
+  </div>
+  </br>
+
+<div class="table-responsive">
+ 
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Meeting Time / Local</th>
+        <th>Start Time</th>
+        <th>Supervisor</th>
+        <th>Store</th>
+        <th>Address</th>
+        
+        
+        
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @jobs.each do |job| %>
+        <tr>
+          <td><%= job.dt_start.strftime("%d-%m-%Y") %></td>
+          <td> <%= job.meeting_time.strftime("%H:%M") %> / <%= job.meeting_point.local %></td>
+          <td><%= job.start_time.strftime("%H:%M") %></td>
+          <td><%= job.employee_detail.name%> <%=job.employee_detail.surname%></td>
+          <td><%= job.sub_store.store.name %> - <%= job.sub_store.number %></td>
+          <td><%= job.sub_store.address %></td>
+          <td><%= button_to 'Send', add_employee_job_url(:job_id => job.id), :class => 'btn btn-warning btn-sm'%>
+          </td>
+          <td><%= button_to 'Show', jobs_employee_url(:job_id => job.id), :class => 'btn btn-success btn-sm' %></td>
+          <td><%= button_to 'Edit', edit_job_path(job), :class => ' btn btn-info btn-sm', :method => :get   %></td>
+          <td><%= button_to 'Destroy', job, :class => 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

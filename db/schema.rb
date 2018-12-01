@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_184937) do
+ActiveRecord::Schema.define(version: 2018_11_30_112727) do
 
   create_table "employee_assets", force: :cascade do |t|
     t.string "desc"
@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(version: 2018_11_22_184937) do
     t.index ["user_id"], name: "index_employee_details_on_user_id"
   end
 
+  create_table "employee_jobs", force: :cascade do |t|
+    t.integer "employee_detail_id"
+    t.integer "job_id"
+    t.integer "employeer_job_situation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_detail_id"], name: "index_employee_jobs_on_employee_detail_id"
+    t.index ["employeer_job_situation_id"], name: "index_employee_jobs_on_employeer_job_situation_id"
+    t.index ["job_id"], name: "index_employee_jobs_on_job_id"
+  end
+
   create_table "employee_situations", force: :cascade do |t|
     t.string "status"
     t.datetime "created_at", null: false
@@ -48,6 +59,46 @@ ActiveRecord::Schema.define(version: 2018_11_22_184937) do
 
   create_table "employee_visas", force: :cascade do |t|
     t.string "desc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "employeer_job_situations", force: :cascade do |t|
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "job_situations", force: :cascade do |t|
+    t.string "desc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.date "dt_start"
+    t.date "dt_end"
+    t.time "meeting_time"
+    t.time "start_time"
+    t.time "end_time"
+    t.time "job_end"
+    t.integer "supervisor_id"
+    t.decimal "travel_hours"
+    t.decimal "paid_hours"
+    t.integer "supposed_hours"
+    t.integer "meeting_point_id"
+    t.integer "sub_store_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "job_situation_id"
+    t.date "store_end_date"
+    t.index ["job_situation_id"], name: "index_jobs_on_job_situation_id"
+    t.index ["meeting_point_id"], name: "index_jobs_on_meeting_point_id"
+    t.index ["sub_store_id"], name: "index_jobs_on_sub_store_id"
+  end
+
+  create_table "meeting_points", force: :cascade do |t|
+    t.string "local"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

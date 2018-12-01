@@ -1,4 +1,35 @@
  <div class="content" style='background: #ecf0f4'>
- <h1>Page#home1</h1>
-<p>Find me in app/views/page/home.html.erb</p>
+	<div class="panel panel-default">
+		<% if (!@current_user_employer_id.blank?) %>
+  		<div class="panel-heading">Welcome <%= @current_user_employer_id.name%> <%= @current_user_employer_id.surname%>
+  	</div>
+  	<%end%>
+ 		<% if (@current_employee_job.blank?) %>
+      <div class="panel-body">
+    		<p>You have any new jobs!</p>
+  		</div>
+  	<%else%>
+  		<div class="panel-body">
+    		<p>You have <%= @current_employee_job.count %> job(s). Accept or reject them untill the end of the week.</p>
+  		</div>
+   		<table class="table table-striped table-inbox">
+        <tbody>
+        	<% @current_employee_job.each do |current_employee_job| %> 
+        	<tr class="unread">
+            <td class="view-message"><%= current_employee_job.dt_start.strftime("%d-%m-%Y")%></td>
+            <td class="view-message"><%= current_employee_job.meeting_time.strftime("%H:%M")%></td>
+            <td class="view-message"><%=current_employee_job.sub_store.store.name%></td>
+            <td class="view-message"><%=current_employee_job.sub_store.address%></td>
+            <td><%= collection_select :employeer_job_situation, :employeer_job_situation_id, EmployeerJobSituation.all, :id, :status, {:include_blank => false} , {class: "form-control", :id=> "select_situation_id"} %></td>
+            <td><span class="btn btn-info btn-sm", id="btnsave", data-job=<%=current_employee_job.id%>>Save</span></td>          
+            <td><%= button_to 'View', jobs_employee_url(:job_id => current_employee_job.id), :class => 'btn btn-success btn-sm' %></td>
+          </tr>     
+              
+      <% end %>
+                          </tbody>
+                          </table>
+</div>
+
+ <% end %>
+
 </div>

@@ -1,0 +1,73 @@
+<div class="container"> 
+ <p id="notice"><%= notice %></p>
+  <div class="row">      
+    <div class="col-md-10">
+      <p>::Job</p>
+    </div>
+    <div class="col-md-4-right">
+      <%= link_to 'Edit Job', edit_job_path(@job), :class => 'btn btn-primary'%>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-2">Date: </div>
+    <div class="col-md-8"><%= @job.dt_start.strftime("%d-%m-%Y") %></div>
+    <div class="w-100"></div>
+    <div class="col-md-2">Meeting Time / Local:</div>
+    <div class="col-md-8"><%= @job.meeting_time.strftime("%H:%M") %> / <%= @job.meeting_point.local %></div>
+    <div class="w-100"></div>
+    <div class="col-md-2">Start Time: </div>
+    <div class="col-md-8"><%= @job.start_time.strftime("%H:%M") %></div>
+    <div class="w-100"></div>
+    <div class="col-md-2">Store: </div>
+    <div class="col-md-8"><%= @job.sub_store.store.name %> - <%= @job.sub_store.number %></div>
+    <div class="w-100"></div>
+    <div class="col-md-2">Address:</div>
+    <div class="col-md-8"><%= @job.sub_store.address %></div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">Employeers:</div>
+    <div class="col-md-8">
+    <%if @employee_jobs%>
+      <% @employee_jobs.each do |employee_jobs| %>      
+          <%= employee_jobs.employee_detail.name %> <%= employee_jobs.employee_detail.surname %> -  <%= employee_jobs.employee_detail.employee_asset.desc %></br>      
+      <% end %>
+    <%else%>
+     <%= @job.employee_detail.name %> <%= @job.employee_detail.surname %>
+    <% end %>
+    </div>
+  </div>
+</div>
+
+ 
+
+<p>
+  <strong>Dt end:</strong>
+  <%= @job.dt_end %>
+</p>
+<p>
+  <strong>End time:</strong>
+  <%= @job.end_time %>
+</p>
+
+<p>
+  <strong>Job end:</strong>
+  <%= @job.job_end %>
+</p>
+
+<p>
+  <strong>Travel hours:</strong>
+  <%= @job.travel_hours %>
+</p>
+
+<p>
+  <strong>Paid hours:</strong>
+  <%= @job.paid_hours %>
+</p>
+
+<p>
+  <strong>Supposed hours:</strong>
+  <%= @job.supposed_hours %>
+</p>
+
+

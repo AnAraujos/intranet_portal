@@ -1,0 +1,101 @@
+<div class="container">
+  <%= form_with(model: job, local: true) do |form| %>
+    <% if job.errors.any? %>
+      
+      <div class="alert alert-danger" role="alert">
+        <h5><%= pluralize(job.errors.count, "error") %> prohibited this Job from being saved:</h5>
+        <ul><% job.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+  <div class="form-row">
+    <div class="form-group col-md-2">
+        <%= form.label :store_id, 'Store:' %>
+        <%= form.collection_select :store_id, Store.where(active: true).order(:name), :id, :name, {:include_blank => "Select a Store"},{:id=>'store_id_select', class: "form-control"} %>
+        
+      </div>
+      <div class="form-group col-md-4">
+        <%= form.label :sub_store_id %><br>
+        <%= form.grouped_collection_select :sub_store_id, Store.order(:name), :sub_stores, :id, :id, :label_for_substore, {:include_blank => "Select a Store"}, {:id=>'sub_store_id_select', required: true, class: "form-control", disabled: true} %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <%= form.label :dt_start, 'Job Date:' %>
+        <%= form.date_field :dt_start, {:id => "datepicker", class:'form-control', required: true} %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= form.label :meeting_time, 'Meeting Time:'%>
+        <%= form.time_field :meeting_time, {:id => "datepicker", class:'form-control', required: true} %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= form.label :start_time, 'Start Time:'%>
+        <%= form.time_field :start_time, {:id => "datepicker", class:'form-control', required: true} %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <%= form.label :meeting_point_id, 'Meeting Point:' %>
+        <%= form.collection_select(:meeting_point_id, MeetingPoint.all, :id, :local, {:include_blank => "Select Point"}, {class: "form-control", required: true}) %>
+      </div>
+      <div class="form-group col-md-4">
+        <%= form.label :supervisor_id, 'Supervisor:' %>
+        <%= form.collection_select(:supervisor_id, EmployeeDetail.find_supervisor, :id, :label_for_employee, {:include_blank => "Select a Supervisor"}, {class: "form-control", required: true}) %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+          <%= form.label :job_situation_id, 'Job Situation:' %>
+          <%= form.collection_select(:job_situation_id, JobSituation.all, :id, :desc, {:include_blank => "Select a Job Situation"}, {class: "form-control", required: true, :id =>"job_situation_select"}) %>
+      </div>
+    </div>
+    <div class="form-row", id="div_job_end">
+      <div class="form-group col-md-2">
+        <%= form.label :store_end_date, 'Store End Date:'%>
+        <%= form.date_field :store_end_date, :id => "datepicker", class:'form-control store_end' %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= form.label :end_time, 'Store End Time:'%>
+        <%= form.time_field :end_time, :id => "datepicker", class:'form-control end_time' %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= form.label :dt_end, 'Job End Date:' %>
+        <%= form.date_field :dt_end, :id => "datepicker", class:'form-control job_end'%>
+      </div>
+      <div class="form-group col-md-2">
+        <%= form.label :job_end, 'Job End Time:'%>
+        <%= form.time_field :job_end, :id => "datepicker", class:'form-control job_end' %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-sm-2">
+        <%= form.label :travel_hours, 'Travel Hours:' %>
+        <%= form.text_field :travel_hours, {class:'form-control'} %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= form.label :paid_hours, 'Paid Hours:' %>
+        <%= form.text_field :paid_hours, {class:'form-control'} %>
+      </div>
+      <div class="form-group col-md-2">
+        <%= form.label :supposed_hours, 'Supposed Hours:' %>
+        <%= form.text_field :supposed_hours, {class:'form-control', required: true}%>
+      </div>
+    </div>
+    
+    <div class="form-row">
+      <div class="form-group col-md-2">
+         <%= form.submit 'Save Job', :class => 'btn btn-primary' %>
+      </div>
+      <% end -%>
+      <div class="form-group col-md-2">
+       <%= button_to 'Cancel', jobs_path, :class => 'btn btn-outline-primary', :method => :get%>
+      </div>   
+    </div>
+</div>
+
+
+

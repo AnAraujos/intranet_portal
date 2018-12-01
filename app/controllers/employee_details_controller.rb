@@ -8,6 +8,11 @@ class EmployeeDetailsController < ApplicationController
    
   end
 
+  def find_supervisor
+    EmployeeDetail.find_supervisor
+  end
+
+
   # GET /employee_details/1
   # GET /employee_details/1.json
   def show
@@ -22,23 +27,6 @@ class EmployeeDetailsController < ApplicationController
   def edit
   end
 
-  def edit_info
-
-    respond_to do |format|
-      @user = User.find_by_email(@employee_detail.user.email)
-      if @employee_detail.update(employee_detail_params)
-         @user = User.find_by_email(@employee_detail.user.email)
-         
-         @user.update_attributes(admin:params[:employee_detail][:admin])
-
-        format.html { redirect_to @employee_detail, notice: 'Employee detail was successfully updated.' }
-        format.json { render :show, status: :ok, location: @employee_detail }
-      else
-        format.html { render :edit }
-        format.json { render json: @employee_detail.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # POST /employee_details
   # POST /employee_details.json
@@ -56,6 +44,7 @@ class EmployeeDetailsController < ApplicationController
         @employee_detail.errors.add(:employee_number, 'already exists!')
       end 
       render "new"
+      
     else
 
       createUser
@@ -94,7 +83,7 @@ class EmployeeDetailsController < ApplicationController
       if @employee_detail.update(employee_detail_params)
          @user = User.find_by_email(@employee_detail.user.email)
          
-         @user.update_attributes(admin:params[:employee_detail][:admin])
+         @user.update_attributes(admin: params[:employee_detail][:admin])
 
         format.html { redirect_to @employee_detail, notice: 'Employee detail was successfully updated.' }
         format.json { render :show, status: :ok, location: @employee_detail }
@@ -116,6 +105,19 @@ class EmployeeDetailsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def find_employers_given_asset_and_job_id
+   
+   employee_asset_id = params[:employee_asset_id]
+   job_id = params[:job_id]
+
+   employers = EmployeeDetail.available_employee(employee_asset_id, job_id).as_json
+   respond_to do |format|
+        format.json { 
+            render json: employers
+        } 
+   end
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.
