@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-3">
         <%= form.label :meeting_point_id, 'Meeting Point:' %>
         <%= form.collection_select(:meeting_point_id, MeetingPoint.all, :id, :local, {:include_blank => "Select Point"}, {class: "form-control", required: true}) %>
       </div>

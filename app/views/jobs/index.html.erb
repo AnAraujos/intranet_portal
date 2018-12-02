@@ -10,6 +10,7 @@
   </br>
 
 <div class="table-responsive">
+<%= will_paginate @clients, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
  
   <table class="table table-striped">
     <thead>
@@ -39,5 +40,6 @@
       <% end %>
     </tbody>
   </table>
+  <%= will_paginate @clients, list_classes: %w(pagination justify-content-end) %>
 </div>
 
