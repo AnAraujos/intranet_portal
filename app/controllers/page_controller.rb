@@ -40,7 +40,7 @@ class PageController < ApplicationController
 		 	where("employee_jobs.employeer_job_situation_id != '1'").
 		 	select("jobs.*, employee_jobs.employeer_job_situation_id as situation").
 		 	where("EXTRACT( year from dt_start::date)::integer = ? ", params[:y]).
-      where("EXTRACT( month from dt_start::date) = ? ", params[:m]).
+      where("EXTRACT( month from dt_start::date) = ? ", params[:m])
 		end
   end 
  
