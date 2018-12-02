@@ -10,10 +10,10 @@ class PageController < ApplicationController
   def myjobs
   	if user_signed_in?
 		 	 @current_employee_job_by_month = Job.joins(:employee_jobs).
-       group("EXTRACT( month from dt_start::date)").
-       group("EXTRACT( year from dt_start::date)::integer").
+       group("EXTRACT( month from dt_start::date) as mon").
+       group("EXTRACT( year from dt_start::date)::integer as ano").
 		 	 where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-		 	 select("max(dt_start) as dt_start, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
+		 	 select("mon, ano, max(dt_start) as dt_start, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
 		 	 
       @employee = EmployeeDetail.find_by(id: @current_user_employer_id)
 
@@ -39,7 +39,8 @@ class PageController < ApplicationController
 		 	where("jobs.job_situation_id = '2'").
 		 	where("employee_jobs.employeer_job_situation_id != '1'").
 		 	select("jobs.*, employee_jobs.employeer_job_situation_id as situation").
-		 	where("strftime('%m-%Y', dt_start) = ? ", params[:dt])
+		 	where("EXTRACT( year from dt_start::date)::integer = ? ", params[:y]).
+      where("EXTRACT( month from dt_start::date) = ? ", params[:m]).
 		end
   end 
  
