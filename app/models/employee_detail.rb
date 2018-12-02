@@ -1,6 +1,6 @@
 class EmployeeDetail < ApplicationRecord
   belongs_to :employee_visa
-  belongs_to :employee_asset
+  belongs_to :employee_asset, :foreign_key => "employee_asset_id"
   belongs_to :employee_situation
   belongs_to :user
   has_many :employee_jobs

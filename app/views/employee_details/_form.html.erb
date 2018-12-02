@@ -34,13 +34,13 @@
             <% if employee_detail.user.admin? %>
               <%= form.check_box :admin, :checked => true, :disabled => false, class:'form-check-input'%>
             <% else %>
-              <%= form.check_box :admin, :checked => false, :disabled => false, class:'form-check-input' %>
+              <%= form.check_box :admin, :checked => false, :disabled => true, class:'form-check-input' %>
             <% end %>
           <% else %>
             <% if @admin == '1'  %>
               <%= form.check_box :admin, :checked => true, :disabled => true,class:'form-check-input' %> 
             <% else %>
-              <%= form.check_box :admin, :checked => false, :disabled => true,class:'form-check-input' %> 
+              <%= form.check_box :admin, :checked => false, :disabled => false,class:'form-check-input' %> 
             <% end %>
           <% end %>
           <%= form.label :admin, 'Admin', class:'form-check-label'%>
