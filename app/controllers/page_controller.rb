@@ -39,7 +39,7 @@ class PageController < ApplicationController
 
 		 	@past_current_employee_job = Job.joins(:employee_jobs).
 		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-      where("EXTRACT( year from dt_start::date)::integer = #{y}? ").
+      where("EXTRACT( year from dt_start::date)::integer = ? ", y.to_i).
 		 	select("jobs.*, employee_jobs.employeer_job_situation_id as situation")
     
 		 	
