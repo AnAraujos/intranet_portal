@@ -10,10 +10,10 @@ class PageController < ApplicationController
   def myjobs
   	if user_signed_in?
 		 	 @current_employee_job_by_month = Job.joins(:employee_jobs).
-       group("EXTRACT( month from dt_start::date) as mon").
-       group("EXTRACT( year from dt_start::date)::integer as ano").
+       group("EXTRACT( month from dt_start::date)").
+       group("EXTRACT( year from dt_start::date)::integer").
 		 	 where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-		 	 select("mon, ano, max(dt_start) as dt_start, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
+		 	 select("max(dt_start) as dt_start, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
 		 	 
       @employee = EmployeeDetail.find_by(id: @current_user_employer_id)
 
@@ -28,19 +28,23 @@ class PageController < ApplicationController
 
   def jobs_list
   	if user_signed_in?
+      m = params[:dt].strftime("%m")
+      y = params[:dt].strftime("%Y")
 		 	@next_current_employee_job = Job.joins(:employee_jobs).
 		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
 		 	where("job_situation_id = '1'").
 		 	where("employee_jobs.employeer_job_situation_id != '1'").
-		 	where("strftime('%m-%Y', dt_start) = ? ", params[:dt])
+		 	where("EXTRACT( year from dt_start::date)::integer = ? ", y).
+      where("EXTRACT( month from dt_start::date) = ? ", m)
 
 		 	@past_current_employee_job = Job.joins(:employee_jobs).
 		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
 		 	where("jobs.job_situation_id = '2'").
 		 	where("employee_jobs.employeer_job_situation_id != '1'").
-		 	select("jobs.*, employee_jobs.employeer_job_situation_id as situation").
-		 	where("EXTRACT( year from dt_start::date)::integer = ? ", params[:y]).
-      where("EXTRACT( month from dt_start::date) = ? ", params[:m])
+      where("EXTRACT( year from dt_start::date)::integer = ? ", y).
+      where("EXTRACT( month from dt_start::date) = ? ", m).
+		 	select("jobs.*, employee_jobs.employeer_job_situation_id as situation")
+		 	
 		end
   end 
  
