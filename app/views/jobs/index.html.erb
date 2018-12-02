@@ -26,7 +26,7 @@
     <tbody>
       <% @jobs.each do |job| %>
         <tr>
-        <td> <%= job.meeting_time.strftime(" %d/%m/%Y") %> </td>
+        <td> <%= job.dt_start.strftime(" %d/%m/%Y") %> </td>
           <td> <%= job.meeting_time.strftime("%H:%M") %> / <%= job.meeting_point.local %></td>
           <td><%= job.employee_detail.name%> <%=job.employee_detail.surname%></td>
           <td><%= job.sub_store.store.name %> - <%= job.sub_store.number %> - <%= job.sub_store.address %></td>
