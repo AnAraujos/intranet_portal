@@ -34,7 +34,7 @@ class PageController < ApplicationController
       y = dt.strftime("%Y")
 		 	@next_current_employee_job = Job.joins(:employee_jobs).
 		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-      where("to_char(dt_start,'Mon') = ?", m)
+		 	where("to_char(dt_start,'Mon') = ?", m)
 
 
 		 	@past_current_employee_job = Job.joins(:employee_jobs).
