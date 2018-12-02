@@ -28,7 +28,7 @@ class PageController < ApplicationController
 
   def jobs_list
   	if user_signed_in?
-      dt = Date.strftime(params[:dt], "%m/%y")
+      dt = Date.parse(params[:dt]).strftime("%d-%m-%Y")
       m = dt.strftime("%m")
       y = dt.strftime("%Y")
 		 	@next_current_employee_job = Job.joins(:employee_jobs).
