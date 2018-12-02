@@ -14,7 +14,7 @@ class PageController < ApplicationController
        group("EXTRACT( year from dt_start::date)::integer").
        group("jobs.id").
 		 	 where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-		 	 select("jobs.*, jobs.id, avg(jobs.id) as ag, employee_jobs.employee_detail_id as employee, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
+		 	 select("jobs.*, jobs.id, avg(jobs.id) as ag, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
 		 	 
       @employee = EmployeeDetail.find_by(id: @current_user_employer_id)
 
