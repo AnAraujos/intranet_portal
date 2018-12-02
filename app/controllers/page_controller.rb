@@ -39,6 +39,8 @@ class PageController < ApplicationController
 		 	where("EXTRACT( year from dt_start::date) = ? ", y).
       where("EXTRACT( month from dt_start::date) = ? ", m)
 
+puts "teste"
+puts @next_current_employee_job.count
 		 	@past_current_employee_job = Job.joins(:employee_jobs).
 		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
 		 	where("jobs.job_situation_id = '2'").
@@ -46,6 +48,7 @@ class PageController < ApplicationController
       where("EXTRACT( year from dt_start::date) = ? ", y).
       where("EXTRACT( month from dt_start::date) = ? ", m).
 		 	select("jobs.*, employee_jobs.employeer_job_situation_id as situation")
+      puts @past_current_employee_job.count
 		 	
 		end
   end 
