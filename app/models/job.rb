@@ -18,7 +18,7 @@ class Job < ApplicationRecord
     available_date_time_future = job.meeting_time + suppost_hours.hour
     available_date_time_past = job.meeting_time - 20.hour
     joins(:employee_jobs).
-    where.not(:meeting_time => available_date_time_future..available_date_time_past).
+    where(:meeting_time => available_date_time_future..available_date_time_past).
     where("employee_jobs.employee_detail_id =?", employee_id)
   end
 
