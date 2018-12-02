@@ -34,18 +34,14 @@ class PageController < ApplicationController
       y = dt.strftime("%Y")
 		 	@next_current_employee_job = Job.joins(:employee_jobs).
 		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-		 	where("job_situation_id = '1'").
-		 	where("employee_jobs.employeer_job_situation_id != '1'").
-		 	where("EXTRACT( year from dt_start::date) = ? ", y).
-      where("EXTRACT( month from dt_start::date) = ? ", m)
+		 	where("EXTRACT( year from dt_start::date)::integer = ? ", y.to_i).
+      where("EXTRACT( month from dt_start::date)::integer = ? ", m.to_i)
 
 
 		 	@past_current_employee_job = Job.joins(:employee_jobs).
 		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-		 	where("jobs.job_situation_id = '2'").
-		 	where("employee_jobs.employeer_job_situation_id != '1'").
-      where("EXTRACT( year from dt_start::date) = ? ", y).
-      where("EXTRACT( month from dt_start::date) = ? ", m).
+      where("EXTRACT( year from dt_start::date)::integer = ? ", y.to_i).
+      where("EXTRACT( month from dt_start::date)::integer = ? ", m.to_i).
 		 	select("jobs.*, employee_jobs.employeer_job_situation_id as situation")
     
 		 	
