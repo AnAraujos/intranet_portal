@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-3">
         <%= form.label :dt_start, 'Job Date:' %>
         <%= form.date_field :dt_start, {:id => "datepicker", class:'form-control', required: true} %>
       </div>
@@ -54,7 +54,7 @@
       </div>
     </div>
     <div class="form-row", id="div_job_end">
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-3">
         <%= form.label :store_end_date, 'Store End Date:'%>
         <%= form.date_field :store_end_date, :id => "datepicker", class:'form-control store_end' %>
       </div>
@@ -62,7 +62,7 @@
         <%= form.label :end_time, 'Store End Time:'%>
         <%= form.time_field :end_time, :id => "datepicker", class:'form-control end_time' %>
       </div>
-      <div class="form-group col-md-2">
+      <div class="form-group col-md-3">
         <%= form.label :dt_end, 'Job End Date:' %>
         <%= form.date_field :dt_end, :id => "datepicker", class:'form-control job_end'%>
       </div>
@@ -72,14 +72,7 @@
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-sm-2">
-        <%= form.label :travel_hours, 'Travel Hours:' %>
-        <%= form.text_field :travel_hours, {class:'form-control'} %>
-      </div>
-      <div class="form-group col-md-2">
-        <%= form.label :paid_hours, 'Paid Hours:' %>
-        <%= form.text_field :paid_hours, {class:'form-control'} %>
-      </div>
+      
       <div class="form-group col-md-2">
         <%= form.label :supposed_hours, 'Supposed Hours:' %>
         <%= form.text_field :supposed_hours, {class:'form-control', required: true}%>

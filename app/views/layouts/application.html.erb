@@ -34,12 +34,10 @@
             <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">My Account</a> 
              
               <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li><a href="/myjobs">My Jobs</a></li>
                 <% if (!@current_user_employer_id.blank?) %>
+                  <li><a href="/myjobs">My Jobs</a></li>
                   <%= link_to "Edit Profile", edit_employee_detail_path(@current_user_employer_id) %>
                 <% end %>
-                  <li><a href="#">Request Holidays</a></li>
-                <li><a href="#">Request P45</a></li>
                 <%= link_to 'Change my Password', edit_user_registration_path %>
               </ul>
           </li>

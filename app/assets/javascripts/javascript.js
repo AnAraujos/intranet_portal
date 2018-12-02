@@ -1,6 +1,13 @@
 $(document).ready(function(){
     var array = Array();
-    $('#div_job_end').hide();
+    var situation_job = $('#job_situation_select').val();
+    console.log(situation_job)
+    if (situation_job == 2)  {
+      $('#div_job_end').show();
+    }else{
+      $('#div_job_end').hide();
+    }
+
   $(document).on('change','#asset_id_select', function () {
    load_employeers_from_asset_dropdown();
   });
@@ -18,9 +25,7 @@ $(document).ready(function(){
                   },
                   error: function(e) {
                       console.log(e.message);
-                  }
-   
-   
+                  }   
       });
   };
 
@@ -46,8 +51,8 @@ $(document).ready(function(){
 
 
   $(document).on('click','#btnsave', function () {
-   var id_status =  $('#select_situation_id').val();
-   var job = (this.getAttribute("data-job"));
+    var id_status =  $('#select_situation_id').val();
+    var job = (this.getAttribute("data-job"));
     var request = "save?id_status=" 
       +id_status+ "&job_id="+ job
 
@@ -66,7 +71,40 @@ $(document).ready(function(){
   });
 
   $('#addbtn').click(function(){
-    var newitem = $('#employee_id_select').val();
+    var employee_check_hours = $('#employee_id_select').val();
+    var job_id_check_date = $('#job_id').val();
+    var request = "check_limite_hours?employee=" 
+      +employee_check_hours+"&job_id="+ job_id_check_date
+
+      var aj = Rails.ajax({
+        url: request,
+        type: 'get',
+        data: $(this).serialize(),
+              success: function(data) {
+                  add_to_list(data);
+                 
+              },
+              error: function(e) {
+                  console.log(e.message);
+              } 
+          });
+   });
+
+  function add_to_list(data){
+    var newitem = $('#employee_id_select').val()
+    
+    if (data && data !=""){
+      if (data >= 20){
+      alert("Employee can not be added to the list. Reason: Student Visa 20h");
+      return
+      }
+      if (data[0].id){
+      alert("Employee can not be added to the list. Reason: Employee already has jobs to this Job date OR in the past or future 20 hours");
+      return
+      }
+
+    }else{
+
     if (newitem && newitem =="Select Employee") {
       alert("Select an Employee.");
       return
@@ -81,17 +119,19 @@ $(document).ready(function(){
       $('#employee_id_select').val('Select Employee');
       return false; 
      }
-   });
+   }
+  };
     
-    $('#list').delegate(".listelement", "click", function() {
+ '--------------------------------------------------------------------------------------------------------'   
+  $('#list').delegate(".listelement", "click", function() {
     var elemid = $(this).attr('data-id');
     $("#"+elemid).remove();
     var index = array.indexOf(elemid);
       if (index > -1) {
         array.splice(index, 1);
       }
-   
-    });
+   });
+'---------------------------------------------------------------------------------------------------------'
     $('#btnSend').click(function(){
      if (array && array =="") {
       alert("Select an Employee.");
@@ -99,9 +139,11 @@ $(document).ready(function(){
       }
     });   
 
-      $(document).on('change','#job_situation_select', function () {
+
+'--------------------------------------------------------------------------------------------------------'
+    $(document).on('change','#job_situation_select', function () {
       situation_job = $('#job_situation_select').val();
-      if (situation_job == '2') {
+      if (situation_job == 2) {
         $('#div_job_end').show();
         $('.dt_end').prop("required", true)
         $('.end_time').prop("required", true)

@@ -4,7 +4,7 @@ class JobsController < ApplicationController
   # GET /jobs
   # GET /jobs.json
   def index
-    @jobs = Job.all
+    @jobs = Job.all.order(:dt_start)
   end
   # GET /jobs/1
   # GET /jobs/1.json
@@ -32,8 +32,10 @@ class JobsController < ApplicationController
   # POST /jobs.json
   def create
 
-    if (params[:job][:job_situation_id] = 2)
-     
+    check_job_status = job_params[:job_situation_id].to_s
+
+    if (check_job_status == "2")
+      
       date_start = (job_params[:dt_start])
       time_start = (job_params[:start_time])
       meeting_time = (job_params[:meeting_time])
@@ -59,14 +61,16 @@ class JobsController < ApplicationController
 
       params[:job][:travel_hours] = travel_hours
       params[:job][:paid_hours] = paid_hour
+   end
 
-    end
+    meeting_date_time = DateTime.parse([ (job_params[:dt_start]), (job_params[:meeting_time]) ].join(' ')) 
+    params[:job][:meeting_time] = meeting_date_time.strftime("%Y-%m-%d %H:%M:%S")
     
     @job = Job.new(job_params)
 
     respond_to do |format|
       if @job.save
-        create_employee_job(@job.id)
+        create_employee_job_supervisor(@job.id)
         format.html { redirect_to @job, notice: 'Job was successfully created.' }
         format.json { render :show_id, status: :created, location: @job }
       else
@@ -76,20 +80,20 @@ class JobsController < ApplicationController
     end
   end
 
-  def create_employee_job(job_id)
+  def create_employee_job_supervisor(job_id)
     job = job_id
     supervisor_id = params[:job][:supervisor_id]
-    job_situation = params[:job][:job_situation_id]
-    employee_job = EmployeeJob.new(job_id: job, employee_detail_id: supervisor_id)
+    employee_job = EmployeeJob.new(job_id: job, employee_detail_id: supervisor_id, employeer_job_situation_id: 1)
     employee_job.save ? true : user.errors
   end
 
   # PATCH/PUT /jobs/1
   # PATCH/PUT /jobs/1.json
   def update
+    check_job_status = job_params[:job_situation_id].to_s
 
-    if (params[:job][:job_situation_id] = 2)
-     
+    if (check_job_status == "2")
+
       date_start = (job_params[:dt_start])
       time_start = (job_params[:start_time])
       meeting_time = (job_params[:meeting_time])
@@ -120,6 +124,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.update(job_params)
+        create_employee_job_supervisor(@job.id)
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }
         format.json { render :show, status: :ok, location: @job }
       else

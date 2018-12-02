@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/home' => 'page#home'
+  post '/home' => 'page#home'
   get '/myjobs' => 'page#myjobs'
   get '/employee' => 'employee_details#index'
   get '/employee_details/:id/show'    => 'employee_details#show'
@@ -36,6 +37,8 @@ Rails.application.routes.draw do
   get 'save' => 'employee_jobs#edit_situation', :as => :save    
 
   post '/employee_jobs/:id/edit'    => 'employee_jobs#edit'
+
+  get 'check_limite_hours' => 'employee_jobs#check_limite_hours'
 
 end
 

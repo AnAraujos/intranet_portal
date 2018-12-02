@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_112727) do
+ActiveRecord::Schema.define(version: 2018_12_02_132507) do
 
   create_table "employee_assets", force: :cascade do |t|
     t.string "desc"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_112727) do
   create_table "jobs", force: :cascade do |t|
     t.date "dt_start"
     t.date "dt_end"
-    t.time "meeting_time"
+    t.datetime "meeting_time"
     t.time "start_time"
     t.time "end_time"
     t.time "job_end"

@@ -75,7 +75,29 @@ class EmployeeJobsController < ApplicationController
     end
   end
 
-  
+  def check_limite_hours
+    employee_id = params[:employee]
+    job_id = params[:job_id]
+    @job_ckeck_date = Job.find(params[:job_id])
+    check_visa = EmployeeDetail.check_visa(employee_id)
+    if !check_visa.empty?
+      @check_hours = Job.check_hours(employee_id, @job_ckeck_date.dt_start)
+      @total_hours = @check_hours.sum(:supposed_hours)
+      json_return = @total_hours
+      if (@total_hours <= 20)
+         @check_jobs_dates_employee = Job.check_jobs_dates_employee(employee_id, @job_ckeck_date) 
+         json_return = @check_jobs_dates_employee
+      end 
+    else  
+      @check_jobs_dates_employee = Job.check_jobs_dates_employee(employee_id, @job_ckeck_date)
+      json_return = @check_jobs_dates_employee 
+    end
+    respond_to do |format|
+        format.json { 
+            render json: json_return.as_json
+        } 
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
