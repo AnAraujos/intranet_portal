@@ -39,6 +39,7 @@
   </div>
 </div>
 
+<% if @job.job_situation_id == 2 %>
  <p>
   <strong>Store End Date:</strong>
   <%= @job.store_end_date.strftime("%d-%m-%Y")%>
@@ -68,6 +69,7 @@
   <strong>Paid hours:</strong>
   <%= @job.paid_hours %>
 </p>
+<% end -%>
 
 <p>
   <strong>Supposed hours:</strong>
