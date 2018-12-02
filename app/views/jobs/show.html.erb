@@ -39,19 +39,23 @@
   </div>
 </div>
 
- 
-
-<p>
-  <strong>Dt end:</strong>
-  <%= @job.dt_end %>
+ <p>
+  <strong>Store End Date:</strong>
+  <%= @job.store_end_date.strftime("%d-%m-%Y")%>
 </p>
 <p>
-  <strong>End time:</strong>
-  <%= @job.end_time %>
+  <strong>Store End Time::</strong>
+  <%= @job.end_time.strftime("%H:%M")%>
+</p>
+
+
+<p>
+  <strong>Job End Date::</strong>
+  <%= @job.dt_end.strftime("%d-%m-%Y")%>
 </p>
 
 <p>
-  <strong>Job end:</strong>
+  <strong>Job End Time:</strong>
   <%= @job.job_end %>
 </p>
 
