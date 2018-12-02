@@ -95,12 +95,11 @@ $(document).ready(function(){
     
     if (data && data !=""){
       if (data >= 20){
-      alert("Employee can not be added to the list. Reason: Student Visa 20h");
+        alert("Employee can not be added to the list. Reason: Student Visa 20h");
       return
       }
       if (data[0].id != 'undefined'){
-        console.log(data[0].id)
-      alert("Employee can not be added to the list. Reason: Employee already has jobs to this Job date OR in the past or future 20 hours");
+        alert("Employee can not be added to the list. Reason: Employee already has jobs to this Job date OR in the past or future 20 hours");
       return
       }
 
