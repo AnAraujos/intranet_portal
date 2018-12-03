@@ -20,7 +20,7 @@
           <%basic_paid = (current_employee_job_by_month.paid_hours.to_i * @employee_rate.to_d)%>
         	<tr class="unread">
           <% if (Rails.env.production?)%>
-              <td class="view-message"><%= link_to ((Date::MONTHNAMES[current_employee_job_by_month.mes]) + "-" + (current_employee_job_by_month.ano)).to_s, page_jobs_list_url(:mes => current_employee_job_by_month.mes, :ano => current_employee_job_by_month.ano ) %>
+              <td class="view-message"><%= link_to ((Date::MONTHNAMES[current_employee_job_by_month.mes])).to_s, page_jobs_list_url(:mes => current_employee_job_by_month.mes, :ano => current_employee_job_by_month.ano ) %>
               </td>
             <%else%>
               <td class="view-message"><%= link_to current_employee_job_by_month.dt_start.strftime("%B-%Y") , page_jobs_list_url(:dt => current_employee_job_by_month.dt_start.strftime("%B-%Y")) %>
