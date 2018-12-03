@@ -27,8 +27,7 @@ class PageController < ApplicationController
 
   def jobs_list
   	if user_signed_in?
-      dt = Date.parse(params[:dt])
-      puts dt
+     
       puts params[:ano]
       m = params[:mes]
       y = params[:ano]
