@@ -13,7 +13,7 @@ class PageController < ApplicationController
        group("EXTRACT( month from dt_start::date)").
        group("EXTRACT( year from dt_start::date)::integer").
 		 	 where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-		 	 select("EXTRACT( month from dt_start::date) as mes, EXTRACT( year from dt_start::date)::integer as ano, max(dt_start) as dtstart, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
+		 	 select("EXTRACT( month from dt_start::date) as mes, EXTRACT( year from dt_start::date) as ano, max(dt_start) as dtstart, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
 		 	 
       @employee = EmployeeDetail.find_by(id: @current_user_employer_id)
 
@@ -30,16 +30,17 @@ class PageController < ApplicationController
   	if user_signed_in?
       dt = Date.parse(params[:dt])
       puts dt
-      m = dt.strftime("%m")
-      y = dt.strftime("%Y")
+      puts params[:ano]
+      m = params[:mes]
+      y = params[:ano]
 		 	@next_current_employee_job = Job.joins(:employee_jobs).
 		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-		 	where("EXTRACT( year from dt_start::date)::integer = ? ", y)
+		 	where("EXTRACT( year from dt_start::date) = ? ", y)
 
 
 		 	@past_current_employee_job = Job.joins(:employee_jobs).
 		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-      where("EXTRACT( year from dt_start::date)::integer = ? ", y.to_i).
+      where("EXTRACT( year from dt_start::date) = ? ", y).
 		 	select("jobs.*, employee_jobs.employeer_job_situation_id as situation")
     
 		 	
