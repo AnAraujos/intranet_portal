@@ -19,7 +19,7 @@
           <%travel_paid = ((current_employee_job_by_month.travel_hours.to_i) + (@travel_rate.to_d))%>
           <%basic_paid = (current_employee_job_by_month.paid_hours.to_i * @employee_rate.to_d)%>
         	<tr class="unread">
-            <td class="view-message"><%= link_to current_employee_job_by_month.dtstart.strftime("%B-%Y"), page_jobs_list_url(:mes => current_employee_job_by_month.mes, :ano => current_employee_job_by_month.ano ) %>
+            <td class="view-message"><%= link_to current_employee_job_by_month.mes, page_jobs_list_url(:mes => current_employee_job_by_month.mes, :ano => current_employee_job_by_month.ano ) %>
             </td>
             <td class="view-message"><%= current_employee_job_by_month.count %></td>
             <td class="view-message"><%= current_employee_job_by_month.paid_hours %></td>
