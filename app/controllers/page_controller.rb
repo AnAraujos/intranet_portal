@@ -13,6 +13,7 @@ class PageController < ApplicationController
         @current_employee_job_by_month = Job.joins(:employee_jobs).
         where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
         group("mes, ano").
+        group("mes, ano").
         select("EXTRACT( month from dt_start::date)::integer as mes, EXTRACT( year from dt_start::date)::integer as ano, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
   		else
         @current_employee_job_by_month = Job.joins(:employee_jobs).
