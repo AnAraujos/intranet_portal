@@ -11,7 +11,7 @@ class PageController < ApplicationController
   	if user_signed_in?
 		 	 @current_employee_job_by_month = Job.joins(:employee_jobs).
        where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-       group("mes, ano")
+       group("mes, ano").
 		 	 select("EXTRACT( month from dt_start::date) as mes, EXTRACT( year from dt_start::date) as ano, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
 		 	 
       @employee = EmployeeDetail.find_by(id: @current_user_employer_id)
