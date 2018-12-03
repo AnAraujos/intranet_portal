@@ -12,7 +12,7 @@ class PageController < ApplicationController
 		 	 @current_employee_job_by_month = Job.joins(:employee_jobs).
        where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
        group("mes, ano").
-		 	 select("EXTRACT( month from dt_start::date) as mes, EXTRACT( year from dt_start::date) as ano, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
+		 	 select("EXTRACT( month from dt_start::date)::integer as mes, EXTRACT( year from dt_start::date)::integer as ano, count(*) as count, sum(paid_hours) as paid_hours, sum(travel_hours) as travel_hours")
 		 	 
       @employee = EmployeeDetail.find_by(id: @current_user_employer_id)
 
@@ -34,12 +34,12 @@ class PageController < ApplicationController
       y = params[:ano]
 		 	@next_current_employee_job = Job.joins(:employee_jobs).
 		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-		 	where("EXTRACT( year from dt_start::date) = ? ", y)
+		 	where("EXTRACT( year from dt_start::date)::integer = ? ", y)
 
 
 		 	@past_current_employee_job = Job.joins(:employee_jobs).
 		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
-      where("EXTRACT( year from dt_start::date) = ? ", y).
+      where("EXTRACT( year from dt_start::date)::integer = ? ", y).
 		 	select("jobs.*, employee_jobs.employeer_job_situation_id as situation")
     
 		 	
