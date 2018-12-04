@@ -7,23 +7,33 @@
             <tr>
               <th>Date</th>
               <th>Store</th>
-              <th>Paid Hours</th>
-              <th>Travel Hours</th>
-              <th>Job Situation</th>
+              <th>Basic/H</th>
+              <th>Travel/H</th>
+              <th>Amount</th>
+              <th>Job</th>
+              <th>Job Status</th>
             </tr>
           </thead>
           <tbody>
           	<% @past_current_employee_job.each do |past_current_employee_job| %> 
+            <%travel_paid = ((past_current_employee_job.travel_hours.to_i) + (@travel_rate.to_d))%>
+            <%basic_paid = (past_current_employee_job.paid_hours.to_i * @employee_rate.to_d)%>
+            <%amount_paid = travel_paid + basic_paid %>
             	<tr class="unread">
                 <td class="view-message"><%= past_current_employee_job.dt_start.strftime("%d-%m-%Y")%></td>
                 <td class="view-message"><%=past_current_employee_job.sub_store.store.name%></td>
                 <td class="view-message"><%=past_current_employee_job.paid_hours%></td>
                 <td class="view-message"><%=past_current_employee_job.travel_hours%></td>
-                <%if past_current_employee_job.situation = 2 %>
+                <td class="view-message"><%=amount_paid%></td>
+                <%if past_current_employee_job.job_situation_id == 2 %>
                   <td class="view-message">Accepted</td>
-                <% elsif past_current_employee_job.situation = 3  %>
+                <% elsif past_current_employee_job.situation == 3  %>
                   <td class="view-message">Rejected</td>
+                 <% else %>
+                  <td class="view-message">Pending</td>
                 <% end %>
+                <td class="view-message"><%=past_current_employee_job.job_situation.desc%></td>    
+                
               </tr>
             <% end %>     
           </tbody>

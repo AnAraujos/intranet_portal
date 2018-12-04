@@ -60,8 +60,8 @@ class JobsController < ApplicationController
       paid_hour = hours - ( travel_hours_start + travel_hours_end )
       travel_hours = travel_hours_start + travel_hours_end
 
-      params[:job][:travel_hours] = travel_hours.round(3)
-      params[:job][:paid_hours] = paid_hour.round(3)
+      params[:job][:travel_hours] = travel_hours.round(2)
+      params[:job][:paid_hours] = paid_hour.round(2)
    end
 
     meeting_date_time = DateTime.parse([ (job_params[:dt_start]), (job_params[:meeting_time]) ].join(' ')) 
@@ -118,8 +118,8 @@ class JobsController < ApplicationController
       paid_hour = hours - ( travel_hours_start + travel_hours_end )
       travel_hours = travel_hours_start + travel_hours_end
 
-      params[:job][:travel_hours] = travel_hours.round(3)
-      params[:job][:paid_hours] = paid_hour.round(3)
+      params[:job][:travel_hours] = travel_hours.round(2)
+      params[:job][:paid_hours] = paid_hour.round(2)
 
     end
 

@@ -18,6 +18,7 @@
         	<% @current_employee_job_by_month.each do |current_employee_job_by_month| %>
           <%travel_paid = ((current_employee_job_by_month.travel_hours.to_i) + (@travel_rate.to_d))%>
           <%basic_paid = (current_employee_job_by_month.paid_hours.to_i * @employee_rate.to_d)%>
+          <%amount_paid = travel_paid + basic_paid %>
         	<tr class="unread">
           <% if (Rails.env.production?)%>
               <% dt = ((Date::MONTHNAMES[current_employee_job_by_month.mes])).to_s + "-" + current_employee_job_by_month.ano.to_s%>
@@ -30,7 +31,7 @@
             <td class="view-message"><%= current_employee_job_by_month.count %></td>
             <td class="view-message"><%= current_employee_job_by_month.paid_hours %></td>
             <td class="view-message"><%= current_employee_job_by_month.travel_hours %></td>
-            <td class="view-message"><%= current_employee_job_by_month.travel_hours%></td>
+            <td class="view-message"><%= amount_paid%></td>
           </tr>
           <% end %>
         </tbody>

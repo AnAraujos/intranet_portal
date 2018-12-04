@@ -173,6 +173,10 @@ ul.labels-info li a i {
 .table-inbox tr td {
     padding: 12px !important;
 }
+
+.table-inbox a {
+    text-decoration: none;
+}
 .table-inbox tr td:hover {
     cursor: pointer;
 }
@@ -185,6 +189,8 @@ ul.labels-info li a i {
 .table-inbox tr.unread td {
     font-weight: 600;
 }
+
+
 ul.inbox-pagination {
     float: right;
 }
@@ -362,4 +368,3 @@ ul {
     padding: 0px;
     margin: 0px;
 }
- 

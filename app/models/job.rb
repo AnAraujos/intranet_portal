@@ -2,8 +2,10 @@ class Job < ApplicationRecord
   belongs_to :meeting_point
   belongs_to :sub_store
   belongs_to :employee_detail, :foreign_key => 'supervisor_id'
+  belongs_to :job_situation
   has_many :employee_details
   has_many :employee_jobs, dependent: :destroy 
+
 
   def self.check_hours(employee_id, job_date)
     diff_days = (job_date - Date.today).round
