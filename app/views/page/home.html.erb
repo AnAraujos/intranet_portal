@@ -29,7 +29,7 @@
               <td class="view-message"><%= current_employee_job.meeting_time.strftime("%H:%M")%></td>
               <td class="view-message"><%=current_employee_job.sub_store.store.name%></td>
               <td class="view-message"><%=current_employee_job.sub_store.address%></td>
-              <td class="view-message"><%=current_employee_job.supposed_hours%></td>
+              <td class="view-message col-md-3"><%=current_employee_job.supposed_hours%></td>
               <td><%= collection_select :employeer_job_situation, :employeer_job_situation_id, EmployeerJobSituation.all, :id, :status, {:include_blank => false} , {class: "form-control", :id=> "select_situation_id"} %></td>
               <td><%= button_to 'Save', '', :class => ' btn btn-info btn-sm', :id=>"btnsave", :method => "", data: {job: current_employee_job.id}   %></td>         
               <td><%= button_to 'View', jobs_employee_url(:job_id => current_employee_job.id), :class => 'btn btn-success btn-sm' %></td>
