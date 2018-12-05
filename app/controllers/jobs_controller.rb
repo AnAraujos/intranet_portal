@@ -1,6 +1,7 @@
 class JobsController < ApplicationController
   before_action :set_job, only: [:show, :edit, :update, :destroy]
 
+
   # GET /jobs
   # GET /jobs.json
   def index
@@ -85,7 +86,7 @@ class JobsController < ApplicationController
     job = job_id
     supervisor_id = params[:job][:supervisor_id]
     employee_job = EmployeeJob.new(job_id: job, employee_detail_id: supervisor_id, employeer_job_situation_id: 1)
-    employee_job.save ? true : user.errors
+    employee_job.save ? true : employee_job.errors
   end
 
   # PATCH/PUT /jobs/1
@@ -125,7 +126,15 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.update(job_params)
-        create_employee_job_supervisor(@job.id)
+        if @job.saved_change_to_supervisor_id?
+          create_employee_job_supervisor(@job.id)
+          previous_supervisor_id = @job.supervisor_id_before_last_save      
+          @employee_job_destroy = EmployeeJob.find_by(job_id: @job.id, employee_detail_id: previous_supervisor_id)
+
+          if !@employee_job_destroy.nil?
+            @employee_job_destroy.destroy
+          end
+        end
         format.html { redirect_to @job, notice: 'Job was successfully updated.' }
         format.json { render :show, status: :ok, location: @job }
       else
