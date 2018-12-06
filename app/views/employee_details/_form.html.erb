@@ -32,20 +32,18 @@
         <div class="form-check">          
           <% if employee_detail.persisted?%>
             <% if current_user.admin? %>
-              <% if employee_detail.user.admin? %>
-                <%= form.check_box :admin, :checked => true, :disabled => false, class:'form-check-input'%>
+                 <%= form.check_box :admin, :checked => true, :disabled => false, class:'form-check-input'%>
               <% else %>
                 <%= form.check_box :admin, :checked => false, :disabled => false, class:'form-check-input' %>
               <% end %>
-            <% end %>
+            
           <% else %>
-          <% if employee_detail.user.admin? %>
+          <% if current_user.try(:admin?) %> 
             <% if @admin == '1'  %>
               <%= form.check_box :admin, :checked => true, :disabled => true,class:'form-check-input' %> 
             <% else %>
               <%= form.check_box :admin, :checked => false, :disabled => false,class:'form-check-input' %> 
             <% end %>
-          <% end %>
           <% end %>
           <%= form.label :admin, 'Admin', class:'form-check-label'%>
         </div>

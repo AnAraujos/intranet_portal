@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>HrProject</title>
+    <title>Intranet Portal</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -26,7 +26,7 @@
         <!-- Sidebar  -->
       <nav id="sidebar">
         <div class="sidebar-header">
-          <h1 class="text-center"><a href="/home">HR</a></h1>
+          <h1 class="text-center"><a href="/home"><%= image_tag("logow.png", :alt => "INTRANET", :style =>"width:100%" ) %></a></h1>
         </div>
 
         <ul class="list-unstyled components">
@@ -54,12 +54,15 @@
                         </li>
                     </ul>
                 </li>
-              <li><a href="/jobs">Add Job</a></li>
+              <li><a href="/jobs">Schdeules</a></li>
             <%end%>
         </ul>
       </nav>
 
         <!-- Page Content  -->
+        <div id="dashboard">
+          <h1> <a href= "/"><%= image_tag("dashboard2.jpg", :alt => "Dashboard", :style =>"width:100%" ) %></a></h1>
+        </div>
       <div id="content">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container-fluid">

@@ -10,8 +10,9 @@
       <div class="login-form">
         <div class="main-div">
           <div class="panel">
+            <a href= "/"><%= image_tag("logo.png", :alt => "INTRANET", :style =>"width:100%" ) %></a>
             <h2> Login</h2>
-            <p>Please enter your email and password</p>
+            <p>Please enter your user ID and password</p>
           </div>
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <div class="field">
