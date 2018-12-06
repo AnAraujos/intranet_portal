@@ -38,7 +38,7 @@
               <% end %>
             
           <% else %>
-          <% if current_user.try(:admin?) %> 
+          
             <% if @admin == '1'  %>
               <%= form.check_box :admin, :checked => true, :disabled => true,class:'form-check-input' %> 
             <% else %>
@@ -107,5 +107,5 @@
        <%= button_to 'Cancel', employee_details_path, :class => 'btn btn-outline-primary', :method => :get%>
       </div>   
     </div>
-</div>
 
+</div>
