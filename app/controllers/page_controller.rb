@@ -42,7 +42,7 @@ class PageController < ApplicationController
         where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
         where("EXTRACT( year from dt_start::date)::integer = ? ", y.to_i).
         where("EXTRACT( month from dt_start::date)::integer = ? ", m.to_i).
-        where ("employee_jobs.employeer_job_situation_id = 2").
+        where("employee_jobs.employeer_job_situation_id = 2").
         where("jobs.job_situation_id != 3 ").
         where("dt_start >= ?", DateTime.now)             
         
@@ -53,7 +53,7 @@ class PageController < ApplicationController
         where("EXTRACT( year from dt_start::date)::integer = ? ", y.to_i).
         where("EXTRACT( month from dt_start::date)::integer = ? ", m.to_i).
         where("dt_start < ?", DateTime.now).
-         where ("employee_jobs.employeer_job_situation_id = 2").
+        where("employee_jobs.employeer_job_situation_id = 2").
         where ("jobs.job_situation_id != 3 ").
         select("jobs.*, employee_jobs.employeer_job_situation_id as situation")
 
