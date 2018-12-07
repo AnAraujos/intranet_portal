@@ -54,7 +54,7 @@ class PageController < ApplicationController
         where("EXTRACT( month from dt_start::date)::integer = ? ", m.to_i).
         where("dt_start < ?", DateTime.now).
         where("employee_jobs.employeer_job_situation_id = 2").
-        where ("jobs.job_situation_id != 3 ").
+        where("jobs.job_situation_id != 3 ").
         select("jobs.*, employee_jobs.employeer_job_situation_id as situation")
 
       else
