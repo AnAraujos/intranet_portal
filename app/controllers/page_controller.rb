@@ -42,6 +42,8 @@ class PageController < ApplicationController
         where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
         where("EXTRACT( year from dt_start::date)::integer = ? ", y.to_i).
         where("EXTRACT( month from dt_start::date)::integer = ? ", m.to_i).
+        where("employee_jobs.employeer_job_situation_id = 2").
+        where("jobs.job_situation_id != 3 ").
         where("dt_start >= ?", DateTime.now)             
         
 
@@ -50,7 +52,9 @@ class PageController < ApplicationController
         where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
         where("EXTRACT( year from dt_start::date)::integer = ? ", y.to_i).
         where("EXTRACT( month from dt_start::date)::integer = ? ", m.to_i).
-        where("dt_start < ?", DateTime.now)
+        where("dt_start < ?", DateTime.now).
+        where("employee_jobs.employeer_job_situation_id = 2").
+        where("jobs.job_situation_id != 3 ").
         select("jobs.*, employee_jobs.employeer_job_situation_id as situation")
 
       else
@@ -58,12 +62,16 @@ class PageController < ApplicationController
   		 	@next_current_employee_job = Job.joins(:employee_jobs).
   		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
   		 	where("strftime('%m-%Y', dt_start) = ? ", dt).
+        where("employee_jobs.employeer_job_situation_id = 2").
+        where("jobs.job_situation_id != 3 ").
         where("dt_start >= ?", DateTime.now)
 
   		 	@past_current_employee_job = Job.joins(:employee_jobs).
   		 	where("employee_jobs.employee_detail_id = ?", @current_user_employer_id).
         where("strftime('%m-%Y', dt_start) = ? ", dt).
         where("dt_start < ?", DateTime.now).
+        where("employee_jobs.employeer_job_situation_id = 2").
+        where("jobs.job_situation_id != 3 ").
   		 	select("jobs.*, employee_jobs.employeer_job_situation_id as situation")
 
      end 
